@@ -14,19 +14,19 @@ module App
     # the framework and any gems in your application.
     config.load_defaults 6.0
 
-    config.secret_key_base = ENV['SECRET_KEY_BASE']
-
-    config.autoload_paths += %W[#{config.root}/lib]
+    config.add_autoload_paths_to_load_path = false
 
     ActionMailer::Base.smtp_settings = {
       address: 'smtp.sendgrid.net',
-      port: 25,
-      domain: 'www.api.com',
       authentication: :plain,
-      user_name: ENV['SENDGRID_USERNAME'],
-      password: ENV['SENDGRID_PASSWORD']
+      domain: ENV['SERVER_HOST'],
+      enable_starttls_auto: true,
+      password: ENV['SENDGRID_API_KEY'],
+      port: 587,
+      user_name: 'apikey'
     }
-    config.action_mailer.default_url_options = { host: ENV['SERVER_URL'] }
+    config.action_mailer.default_url_options = { host: ENV['SERVER_HOST'],
+                                                 port: ENV.fetch('PORT', 3000) }
     config.action_mailer.default_options = {
       from: 'no-reply@api.com'
     }
@@ -35,5 +35,15 @@ module App
       g.test_framework :rspec
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
+
+    # Only loads a smaller set of middleware suitable for API only apps.
+    # Middleware like session, flash, cookies can be added back manually.
+    # Skip views, helpers and assets when generating a new resource.
+    config.api_only = true
+
+    # ActiveAdmin needs the following middlewares to work properly.
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::Flash
   end
 end

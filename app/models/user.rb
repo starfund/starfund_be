@@ -21,8 +21,6 @@
 #  provider               :string           default("email"), not null
 #  uid                    :string           default(""), not null
 #  tokens                 :json
-#  card_id                :string
-#  customer_id            :string
 #
 # Indexes
 #
@@ -42,9 +40,6 @@ class User < ApplicationRecord
 
   before_validation :init_uid
 
-  has_many :payments
-  has_many :credit_cards
-
   def full_name
     return username if first_name.blank?
 
@@ -59,10 +54,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def uses_email?
-    provider == 'email' || email.present?
-  end
 
   def init_uid
     self.uid = email if uid.blank? && provider == 'email'

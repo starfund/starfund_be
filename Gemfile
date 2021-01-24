@@ -1,33 +1,31 @@
 source 'https://rubygems.org'
-ruby '~> 2.6.3'
+ruby '~> 2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
 
+gem 'activeadmin', '~> 2.8'
 gem 'active_storage_base64', '~> 1.0.0'
-gem 'activeadmin', '~> 2.7'
 gem 'arctic_admin', '~> 3.2'
-gem 'aws-sdk-s3', '~> 1', require: false
+gem 'aws-sdk-s3', '~> 1.75', require: false
 gem 'bootsnap', '~> 1.4', '>= 1.4.5'
 gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.4'
-gem 'devise', '~> 4.7.1'
-gem 'devise_token_auth', '~> 1.1', '>= 1.1.3'
-gem 'draper', '~> 3.1'
-gem 'exception_hunter', '~> 0.4'
+gem 'devise', '~> 4.7', '>= 4.7.2'
+gem 'devise_token_auth', '~> 1.1', '>= 1.1.4'
+gem 'draper', '~> 4.0', '>= 4.0.1'
+gem 'exception_hunter', '~> 1.0', '>= 1.0.1'
 gem 'figaro', '~> 1.1.1'
-gem 'jbuilder', '~> 2.9.1'
+gem 'jbuilder', '~> 2.10'
 gem 'oj', '~> 3.9', '>= 3.9.2'
 gem 'pagy', '~> 3.7', '>= 3.7.5'
 gem 'pg', '~> 1.1', '>= 1.1.4'
-gem 'pry-rails', '~> 0.3.9'
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.0'
 gem 'pundit', '~> 2.1'
 gem 'rack-cors', '~> 1.0', '>= 1.0.6'
 gem 'sendgrid', '~> 1.2.4'
 gem 'sprockets', '~> 3.7.2'
 gem 'webpacker', '~> 5.1', '>= 5.1.1'
 gem 'yaaf', '~> 0.1'
-gem 'stripe', '~> 5.23'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -37,9 +35,11 @@ gem 'stripe', '~> 5.23'
 # gem 'image_processing', '~> 1.2'
 
 group :development, :test do
-  gem 'bullet', '~> 6.0.2'
+  gem 'bullet', '~> 6.1'
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
-  gem 'pry-byebug', '~> 3.7', platform: :mri
+  gem 'pry-byebug', '~> 3.9', platform: :mri
+  gem 'pry-rails', '~> 0.3.9'
+  gem 'rspec_api_documentation', '~> 6.1.0'
   gem 'rspec-rails', '~> 3.9'
 end
 
@@ -51,16 +51,16 @@ group :development do
   gem 'i18n-tasks', '~> 0.9.30'
   gem 'letter_opener', '~> 1.7'
   gem 'listen', '~> 3.2'
-  gem 'rails_best_practices', '~> 1.19.4'
+  gem 'rails_best_practices', '~> 1.20'
   gem 'reek', '~> 5.5'
   gem 'rubocop-rails', '~> 2.3', '>= 2.3.2', require: false
-  gem 'rubocop-rootstrap', '~> 0.1.2'
+  gem 'rubocop-rootstrap', '~> 1.2'
   gem 'spring', '~> 2.1'
   gem 'spring-watcher-listen', '~> 2.0.1'
 end
 
 group :test do
-  gem 'faker', '~> 2.7'
+  gem 'faker', '~> 2.13'
   gem 'shoulda-matchers', '~> 4.1', '>= 4.1.2'
   gem 'simplecov', '~> 0.13.0', require: false
   gem 'webmock', '~> 3.7', '>= 3.7.6'
