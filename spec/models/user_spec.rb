@@ -21,6 +21,8 @@
 #  provider               :string           default("email"), not null
 #  uid                    :string           default(""), not null
 #  tokens                 :json
+#  card_id                :string
+#  customer_id            :string
 #
 # Indexes
 #
