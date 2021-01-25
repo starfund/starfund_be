@@ -107,9 +107,7 @@ ActiveRecord::Schema.define(version: 2021_01_25_002702) do
     t.string "country"
     t.float "reach"
     t.integer "height"
-    t.string "association"
     t.datetime "birthdate"
-    t.string "class"
     t.string "organization"
   end
 

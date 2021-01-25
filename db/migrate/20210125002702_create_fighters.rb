@@ -6,9 +6,7 @@ class CreateFighters < ActiveRecord::Migration[6.0]
       t.string :country
       t.float :reach
       t.integer :height
-      t.string :association
       t.datetime :birthdate
-      t.string :class
       t.string :organization
     end
   end
