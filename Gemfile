@@ -9,6 +9,7 @@ gem 'active_storage_base64', '~> 1.0.0'
 gem 'arctic_admin', '~> 3.2'
 gem 'aws-sdk-s3', '~> 1.75', require: false
 gem 'bootsnap', '~> 1.4', '>= 1.4.5'
+gem 'country_select', '~> 4.0'
 gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.4'
 gem 'devise', '~> 4.7', '>= 4.7.2'
 gem 'devise_token_auth', '~> 1.1', '>= 1.1.4'
