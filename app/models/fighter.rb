@@ -12,5 +12,5 @@
 #  organization :string
 #
 class Fighter < ApplicationRecord
-  
+  has_many_attached :images
 end

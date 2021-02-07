@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :first_name, :last_name, :username, :password, :password_confirmation
+  permit_params :id, :email, :first_name, :last_name, :username, :password, :password_confirmation
 
   form do |f|
     f.inputs 'Details' do
