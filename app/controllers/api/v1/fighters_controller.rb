@@ -1,10 +1,11 @@
 module Api
   module V1
     class FightersController < Api::V1::ApiController
-      before_action :auth_user
+      skip_before_action :authenticate_user!
+      skip_after_action :verify_policy_scoped
 
       def index
-        @fighter = Fighter.all
+        @fighters = Fighter.with_attached_images
       end
     end
   end
