@@ -1,5 +1,6 @@
 ActiveAdmin.register Fighter do
-  permit_params :id, :email, :first_name, :last_name, :country, :reach, :height, :organization, :birthdate, images: []
+  permit_params :id, :email, :first_name, :last_name, :country, :reach, :height, :organization,
+                :birthdate, :cover_photo, :profile_pic, :preview_url, images: []
 
 
   show do
@@ -11,6 +12,12 @@ ActiveAdmin.register Fighter do
       row :height
       row :birthdate
       row :organization
+      row "Profile Picture" do |p|
+        image_tag url_for(p.profile_pic)
+      end
+      row "Cover Photo" do |p|
+        image_tag url_for(p.cover_photo)
+      end
       row "Images" do |p|
         ul do
           p.images.each do |photo|
@@ -31,6 +38,9 @@ ActiveAdmin.register Fighter do
     input :height
     input :birthdate
     input :organization
+    input :preview_url
+    f.input :cover_photo, as: :file
+    f.input :profile_pic, as: :file
     f.inputs do
       f.input :images, as: :file, input_html: { multiple: true }
     end
