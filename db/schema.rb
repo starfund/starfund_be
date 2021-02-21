@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_005612) do
+ActiveRecord::Schema.define(version: 2021_02_21_211436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_005612) do
     t.string "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["key"], name: "index_settings_on_key", unique: true
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
