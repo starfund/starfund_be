@@ -1,6 +1,6 @@
 ActiveAdmin.register Fighter do
   permit_params :id, :email, :first_name, :last_name, :country, :reach, :height, :organization,
-                :birthdate, :cover_photo, :profile_pic, :preview_url, images: []
+                :birthdate, :cover_photo, :profile_pic, :preview_url, :sub_price, images: []
 
 
   show do
@@ -10,6 +10,7 @@ ActiveAdmin.register Fighter do
       row :country
       row :reach
       row :height
+      row :sub_price
       row :birthdate
       row :organization
       row "Profile Picture" do |p|
