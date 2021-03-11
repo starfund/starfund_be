@@ -36,7 +36,8 @@ ActiveAdmin.register Fighter do
     input :country
     input :reach
     input :height
-    input :birthdate
+    input :sub_price
+    input :birthdate, start_year: 1900
     input :organization
     input :preview_url
     f.input :cover_photo, as: :file

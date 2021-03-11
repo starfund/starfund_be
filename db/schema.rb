@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_211436) do
+ActiveRecord::Schema.define(version: 2021_03_11_155655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -107,9 +107,10 @@ ActiveRecord::Schema.define(version: 2021_02_21_211436) do
     t.string "country"
     t.float "reach"
     t.integer "height"
-    t.datetime "birthdate"
+    t.date "birthdate"
     t.string "organization"
     t.string "preview_url"
+    t.integer "sub_price"
   end
 
   create_table "payments", force: :cascade do |t|

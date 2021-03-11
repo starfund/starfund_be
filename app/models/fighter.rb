@@ -8,9 +8,10 @@
 #  country      :string
 #  reach        :float
 #  height       :integer
-#  birthdate    :datetime
+#  birthdate    :date
 #  organization :string
 #  preview_url  :string
+#  sub_price    :integer
 #
 class Fighter < ApplicationRecord
   has_many_attached :images
