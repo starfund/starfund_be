@@ -40,12 +40,18 @@ class User < ApplicationRecord
 
   validates :uid, uniqueness: { scope: :provider }
 
+  has_many :credit_cards
+
   before_validation :init_uid
 
   def full_name
     return username if first_name.blank?
 
     "#{first_name} #{last_name}"
+  end
+
+  def default_card
+    credit_cards.find_by(default: true)
   end
 
   def self.from_social_provider(provider, user_params)

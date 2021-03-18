@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_155655) do
+ActiveRecord::Schema.define(version: 2021_03_18_183439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2021_03_11_155655) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "card_id"
+    t.boolean "default", default: false
     t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 
@@ -130,6 +132,17 @@ ActiveRecord::Schema.define(version: 2021_03_11_155655) do
     t.index ["key"], name: "index_settings_on_key", unique: true
   end
 
+  create_table "subscriptons", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "fighter_id", null: false
+    t.integer "last_charge"
+    t.datetime "last_charge_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["fighter_id"], name: "index_subscriptons_on_fighter_id"
+    t.index ["user_id"], name: "index_subscriptons_on_user_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email"
     t.string "encrypted_password", default: "", null: false
@@ -158,4 +171,6 @@ ActiveRecord::Schema.define(version: 2021_03_11_155655) do
 
   add_foreign_key "credit_cards", "users"
   add_foreign_key "exception_hunter_errors", "exception_hunter_error_groups", column: "error_group_id"
+  add_foreign_key "subscriptons", "fighters"
+  add_foreign_key "subscriptons", "users"
 end
