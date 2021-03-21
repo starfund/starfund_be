@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       end
       resources :fighters
       resources :credit_cards
+      resources :subscriptions
     end
   end
 end

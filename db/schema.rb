@@ -132,15 +132,15 @@ ActiveRecord::Schema.define(version: 2021_03_18_183439) do
     t.index ["key"], name: "index_settings_on_key", unique: true
   end
 
-  create_table "subscriptons", force: :cascade do |t|
+  create_table "subscriptions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "fighter_id", null: false
     t.integer "last_charge"
     t.datetime "last_charge_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["fighter_id"], name: "index_subscriptons_on_fighter_id"
-    t.index ["user_id"], name: "index_subscriptons_on_user_id"
+    t.index ["fighter_id"], name: "index_subscriptions_on_fighter_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -171,6 +171,6 @@ ActiveRecord::Schema.define(version: 2021_03_18_183439) do
 
   add_foreign_key "credit_cards", "users"
   add_foreign_key "exception_hunter_errors", "exception_hunter_error_groups", column: "error_group_id"
-  add_foreign_key "subscriptons", "fighters"
-  add_foreign_key "subscriptons", "users"
+  add_foreign_key "subscriptions", "fighters"
+  add_foreign_key "subscriptions", "users"
 end
