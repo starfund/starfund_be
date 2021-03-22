@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < Api::V1::ApiController
-      before_action :auth_user
+      before_action :auth_user, except: :update_password
 
       def show; end
 
@@ -10,10 +10,19 @@ module Api
         render :show
       end
 
+      def update_password
+        current_user.update!(password_params)
+        render :show
+      end
+
       private
 
       def auth_user
         authorize current_user
+      end
+
+      def password_params
+        params.permit(:password)
       end
 
       def user_params

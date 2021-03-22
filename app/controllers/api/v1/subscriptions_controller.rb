@@ -11,8 +11,9 @@ module Api
       end
 
       def create
+        @newbie = !user.present?
         create_provision_user unless user.present?
-        SubscriptionService.new(user, fighter).process(card, price, fighter.id)
+        @subscription = SubscriptionService.new(user, fighter).process(card, price, fighter.id)
       end
 
       private
