@@ -21,7 +21,14 @@ module Api
       def create_provision_user
         @user = User.find_or_create_by(email: params[:email])
         @user.update(password: 'dummypassword') unless @user.password 
-        sign_in(@user)
+
+        sign_in(:user, @user, store: false, bypass: false)
+        @should_update_password = true
+        @auth_headers = @user.create_new_auth_token
+        headers['access-token'] = @auth_headers['access-token']
+        headers['client'] = @auth_headers['client']
+        headers['expiry']  = @auth_headers['expiry']
+        headers['uid'] = @auth_headers['uid']
       end
 
       def user

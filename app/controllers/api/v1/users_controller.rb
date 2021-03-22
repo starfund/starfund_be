@@ -12,6 +12,8 @@ module Api
 
       def update_password
         current_user.update!(password_params)
+        @newbie = false
+        @should_update_password = false
         render :show
       end
 
