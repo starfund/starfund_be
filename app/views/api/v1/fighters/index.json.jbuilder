@@ -6,4 +6,12 @@ json.array! @fighters do |fighter|
     json.filename attachment.filename
     json.url polymorphic_url(attachment)
   end
+  json.public_videos fighter.public_videos do |attachment|
+    json.filename attachment.filename
+    json.url polymorphic_url(attachment)
+  end
+  json.private_videos fighter.public_videos do |attachment|
+    json.filename attachment.filename
+    json.url polymorphic_url(attachment)
+  end
 end
