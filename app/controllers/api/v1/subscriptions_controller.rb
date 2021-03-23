@@ -32,15 +32,15 @@ module Api
       end
 
       def user
-        @user ||= current_user
+        @user ||= current_user || User.find_by(email: params[:email])
       end
 
       def price
-        params[:amount].to_i * 100
+        fighter.sub_price
       end
 
       def fighter
-        Fighter.find_by(params[:fighter_id])
+        Fighter.find(params[:fighter])
       end
 
       def card
