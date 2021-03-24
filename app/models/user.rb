@@ -41,6 +41,7 @@ class User < ApplicationRecord
   validates :uid, uniqueness: { scope: :provider }
 
   has_many :credit_cards
+  has_many :subscriptions
 
   before_validation :init_uid
 
