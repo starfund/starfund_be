@@ -1,6 +1,7 @@
 module Api
   module V1
     class ApiController < ActionController::API
+      helper_method :geo
       # include Pundit
       include DeviseTokenAuth::Concerns::SetUserByToken
 
@@ -16,6 +17,10 @@ module Api
 
       def status
         render json: { online: true }
+      end
+
+      def geo
+        request.location.country_code.downcase
       end
 
       private

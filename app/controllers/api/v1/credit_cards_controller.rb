@@ -4,20 +4,20 @@ module Api
       helper_method :user
 
       def index
-        service = StripeService.new(user)
+        service = StripeService.new(user, geo)
         @card = service.credit_card_info
         @customer = service.customer
       end
 
       def create
-        service = StripeService.new(user)
+        service = StripeService.new(user, geo)
         service.add_card(token_id, email, customer_name) if token_id
         @card = service.credit_card_info
       end
 
       def update
         begin
-          StripeService.new(user).update_credit_card(token_id)
+          StripeService.new(user, geo).update_credit_card(token_id)
         rescue StripeService::StripeException => ex
           return render_not_found(ex.message)
         end

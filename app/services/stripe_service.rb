@@ -4,10 +4,11 @@ class StripeService
   class StripeException < StandardError
   end
 
-  attr_reader :user
+  attr_reader :user, :geo
 
-  def initialize(user)
+  def initialize(user, geo)
     @user = user
+    @geo = geo
   end
 
   def add_card(token_id, email, name)
@@ -54,7 +55,7 @@ class StripeService
 
   def subscribe(price)
     stripe_price_id = Stripe::Price.list(
-                        {currency:'USD', type: 'recurring'}
+                        {currency: currency, type: 'recurring'}
                       ).select{|p| p.unit_amount_decimal.to_i == price}.first.id
     create_customer(user.email, user.first_name) unless user.customer_id
     Stripe::Subscription.create({
@@ -73,6 +74,10 @@ class StripeService
   end
 
   private
+
+  def currency
+    geo == 'ru' ? 'RUR' : 'USD'
+  end
 
   def create_customer(email, name)
     customer_params = {

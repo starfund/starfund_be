@@ -13,7 +13,7 @@ module Api
       def create
         @newbie = !user.present?
         create_provision_user unless user.present?
-        @subscription = SubscriptionService.new(user, fighter).process(card, price, fighter.id)
+        @subscription = SubscriptionService.new(user, fighter, geo).process(card, price, fighter.id)
       end
 
       private
@@ -36,7 +36,7 @@ module Api
       end
 
       def price
-        fighter.sub_price
+        fighter.price_by_geo(geo)
       end
 
       def fighter

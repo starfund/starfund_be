@@ -1,10 +1,11 @@
 class SubscriptionService
-  attr_reader :user, :fighter, :stripe_service
+  attr_reader :user, :fighter, :stripe_service, :geo
 
-  def initialize(user, fighter)
+  def initialize(user, fighter, geo)
     @user = user
     @fighter = fighter
-    @stripe_service = StripeService.new(user);
+    @geo = geo
+    @stripe_service = StripeService.new(user, geo);
   end
 
   def process(token_id, price, fighter_id)

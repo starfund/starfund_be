@@ -31,4 +31,10 @@ class Fighter < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
+
+  def price_by_geo(geo)
+    return price_tier.ru if geo == 'ru'
+
+    price_tier.us
+  end
 end
