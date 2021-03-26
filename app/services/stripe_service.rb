@@ -54,9 +54,13 @@ class StripeService
   end
 
   def subscribe(price)
-    stripe_price_id = Stripe::Price.list(
-                        {currency: currency, type: 'recurring'}
-                      ).select{|p| p.unit_amount_decimal.to_i == price}.first.id
+    puts "LOOKING FOR PRICE: #{price}"
+    puts "GEO: #{geo}"
+    stripe_price = Stripe::Price.list(
+                     {currency: currency, type: 'recurring'}
+                   ).select{|p| p.unit_amount_decimal.to_i == price}
+    puts "PRICES FOUND: #{stripe_price}"
+    stripe_price_id = stripe_price.first.id
     create_customer(user.email, user.first_name) unless user.customer_id
     Stripe::Subscription.create({
       customer: user.customer_id,
