@@ -1,8 +1,23 @@
 ActiveAdmin.register Fighter do
   permit_params :id, :email, :first_name, :last_name, :country, :reach, :height, :organization,
-                :birthdate, :cover_photo, :profile_pic, :preview_url, :sub_price, images: [],
+                :birthdate, :cover_photo, :profile_pic, :preview_url, :price_tier_id, images: [],
                 public_videos: [], private_videos: []
 
+
+  index do
+    column :id
+    column :first_name
+    column :last_name
+    column :country
+    column :reach
+    column :height
+    column :birthdate
+    column :organization
+    column :price_tier
+    column :preview_url
+
+    actions
+  end
 
   show do
     attributes_table do
@@ -11,7 +26,7 @@ ActiveAdmin.register Fighter do
       row :country
       row :reach
       row :height
-      row :sub_price
+      row :price_tier
       row :birthdate
       row :organization
       row "Profile Picture" do |p|
@@ -56,7 +71,7 @@ ActiveAdmin.register Fighter do
     input :country
     input :reach
     input :height
-    input :sub_price
+    input :price_tier, include_blank: false
     input :birthdate, start_year: 1900
     input :organization
     input :preview_url

@@ -2,18 +2,24 @@
 #
 # Table name: fighters
 #
-#  id           :bigint           not null, primary key
-#  first_name   :string
-#  last_name    :string
-#  country      :string
-#  reach        :float
-#  height       :integer
-#  birthdate    :date
-#  organization :string
-#  preview_url  :string
-#  sub_price    :integer
+#  id            :bigint           not null, primary key
+#  first_name    :string
+#  last_name     :string
+#  country       :string
+#  reach         :float
+#  height        :integer
+#  birthdate     :date
+#  organization  :string
+#  preview_url   :string
+#  sub_price     :integer
+#  price_tier_id :bigint           default(1), not null
+#
+# Indexes
+#
+#  index_fighters_on_price_tier_id  (price_tier_id)
 #
 class Fighter < ApplicationRecord
+  belongs_to :price_tier
   has_many :contents
 
   has_many_attached :images
