@@ -11,16 +11,18 @@ module Api
       end
 
       def create
-        @newbie = !user.present?
+        @newbie = !current_user.present?
         create_provision_user unless user.present?
+        return render_internal_error(StandardError.new "Already subscribed") if already_subscribed
+
         @subscription = SubscriptionService.new(user, fighter, geo).process(card, price, fighter.id)
       end
 
       private
 
       def create_provision_user
-        @user = User.find_or_create_by(email: params[:email])
-        @user.update(password: 'dummypassword') unless @user.password 
+        @user = User.create(email: params[:email])
+        @user.update(password: 'dummypassword') unless @user.valid_password?(@user.password) 
 
         sign_in(:user, @user, store: false, bypass: false)
         @should_update_password = true
@@ -31,8 +33,12 @@ module Api
         headers['uid'] = @auth_headers['uid']
       end
 
+      def already_subscribed
+        user.has_sub(fighter)
+      end
+
       def user
-        @user ||= current_user || User.find_by(email: params[:email])
+        @user ||= (current_user || User.find_by(email: params[:email]))
       end
 
       def price
