@@ -21,7 +21,7 @@ module Api
       private
 
       def create_provision_user
-        @user = User.create(email: params[:email])
+        @user = User.create(email: params[:email], first_name: name_array[0], last_name: name_array.slice(1))
         @user.update(password: 'dummypassword') unless @user.valid_password?(@user.password) 
 
         sign_in(:user, @user, store: false, bypass: false)
@@ -43,6 +43,10 @@ module Api
 
       def price
         fighter.price_by_geo(geo)
+      end
+
+      def name_array
+        params[:name].split(' ')
       end
 
       def fighter
