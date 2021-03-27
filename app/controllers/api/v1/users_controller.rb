@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < Api::V1::ApiController
-      before_action :auth_user, except: :update_password
+      # before_action :auth_user, except: :update_password
 
       def show; end
 
@@ -28,7 +28,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:username, :first_name, :last_name, :email)
+        params.require(:user).permit(:username, :first_name, :last_name, :email, :birthdate)
       end
     end
   end

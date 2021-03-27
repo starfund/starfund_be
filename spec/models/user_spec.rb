@@ -23,6 +23,7 @@
 #  tokens                 :json
 #  card_id                :string
 #  customer_id            :string
+#  birthdate              :date
 #
 # Indexes
 #
