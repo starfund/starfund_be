@@ -11,7 +11,13 @@ module Api
       end
 
       def render_create_success
-        render json: { user: resource_data }
+        render json: { user: resource_data_params }
+      end
+
+      def resource_data_params
+        JSON.parse(resource_data.to_json(
+          only: ["id", "first_name", "last_name", "email", "name", "username"]
+        ))
       end
     end
   end
