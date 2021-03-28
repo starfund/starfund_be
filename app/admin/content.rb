@@ -12,7 +12,7 @@ ActiveAdmin.register Content do
         image_tag(url_for(c.image), size: "200x200") if c.image.attached?
       end
       row "Video" do |c|
-        image_tag(url_for(c.video), size: "200x200") if c.video.attached?
+        video_tag(url_for(c.video), size: "200x200") if c.video.attached?
       end
     end
   end
