@@ -22,8 +22,8 @@ ActiveAdmin.register Content do
     input :description
     input :fighter
     input :event_date
-    f.input :image, as: :file
-    f.input :video, as: :file
+    f.input :image, as: :file, input_html: { direct_upload: true }
+    f.input :video, as: :file, input_html: { direct_upload: true }
 
     f.actions
   end

@@ -78,13 +78,13 @@ ActiveAdmin.register Fighter do
     f.input :cover_photo, as: :file
     f.input :profile_pic, as: :file
     f.inputs do
-      f.input :images, as: :file, input_html: { multiple: true }
+      f.input :images, as: :file, input_html: { multiple: true, direct_upload: true }
     end
     f.inputs do
-      f.input :public_videos, as: :file, input_html: { multiple: true }
+      f.input :public_videos, as: :file, input_html: { multiple: true, direct_upload: true }
     end
     f.inputs do
-      f.input :private_videos, as: :file, input_html: { multiple: true }
+      f.input :private_videos, as: :file, input_html: { multiple: true, direct_upload: true }
     end
     f.actions
   end
