@@ -65,7 +65,7 @@ ActiveAdmin.register Fighter do
     end
   end
 
-  form do |f|
+  form multipart: true do |f|
     input :first_name
     input :last_name
     input :country
