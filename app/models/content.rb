@@ -9,6 +9,7 @@
 #  event_date  :date
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  public      :boolean          default(TRUE)
 #
 # Indexes
 #
