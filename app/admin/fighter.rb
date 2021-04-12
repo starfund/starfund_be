@@ -1,6 +1,6 @@
 ActiveAdmin.register Fighter do
   permit_params :id, :email, :first_name, :last_name, :country, :reach, :height, :organization,
-                :birthdate, :cover_photo, :profile_pic, :preview_url, :price_tier_id, images: [],
+                :birthdate, :cover_photo, :profile_pic, :preview_url, :price_tier_id,
                 public_videos: [], private_videos: []
 
 
@@ -35,15 +35,6 @@ ActiveAdmin.register Fighter do
       row "Cover Photo" do |p|
         image_tag(url_for(p.cover_photo), size: "200x200")
       end
-      row "Images" do |p|
-        ul do
-          p.images.each do |photo|
-            li do
-              image_tag(url_for(photo), size: "200x200")
-            end
-          end
-        end
-      end
       row "Previews" do |p|
         ul do
           p.public_videos.each do |video|
@@ -77,9 +68,6 @@ ActiveAdmin.register Fighter do
     input :preview_url
     f.input :cover_photo, as: :file
     f.input :profile_pic, as: :file
-    f.inputs do
-      f.input :images, as: :file, input_html: { multiple: true, direct_upload: true }
-    end
     f.inputs do
       f.input :public_videos, as: :file, input_html: { multiple: true, direct_upload: true }
     end

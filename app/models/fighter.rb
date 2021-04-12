@@ -22,7 +22,6 @@ class Fighter < ApplicationRecord
   belongs_to :price_tier
   has_many :contents
 
-  has_many_attached :images
   has_many_attached :public_videos
   has_many_attached :private_videos
   has_one_attached :cover_photo
