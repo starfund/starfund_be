@@ -2,6 +2,20 @@ ActiveAdmin.register Content do
   permit_params :id, :title, :event_date, :description,
                 :fighter_id, :image, :video, :public
 
+  controller do
+    def create
+      attrs = params[:content]
+      ContentUploadJob.perform_now(attrs)
+      redirect_to admin_contents_path
+    end
+
+    def update
+      attrs = params[:content]
+      ContentUploadJob.perform_now(attrs)
+      redirect_to admin_contents_path
+    end
+  end
+
   show do
     attributes_table do
       row :id
@@ -20,6 +34,7 @@ ActiveAdmin.register Content do
   end
 
   form do |f|
+    input :id, as: :hidden
     input :title
     input :description
     input :fighter
@@ -27,7 +42,6 @@ ActiveAdmin.register Content do
     input :public
     f.input :image, as: :file, input_html: { direct_upload: true }
     f.input :video, as: :file, input_html: { direct_upload: true }
-
     f.actions
   end
 end
