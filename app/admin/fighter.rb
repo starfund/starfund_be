@@ -56,7 +56,7 @@ ActiveAdmin.register Fighter do
     end
   end
 
-  form multipart: true do |f|
+  form multipart: true, direct_upload: true do |f|
     input :first_name
     input :last_name
     input :country

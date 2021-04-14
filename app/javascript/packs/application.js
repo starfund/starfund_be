@@ -16,5 +16,6 @@
 // const imagePath = (name) => images(name, true)
 
 //= require activestorage
+//= require direct_upload
 
 console.log('Hello World from Webpacker')
