@@ -18,4 +18,7 @@
 //= require activestorage
 //= require direct_upload
 
+import * as ActiveStorage from "@rails/activestorage"
+ActiveStorage.start()
+
 console.log('Hello World from Webpacker')
