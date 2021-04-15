@@ -10,6 +10,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  status           :integer
+#  stripe_sub       :string
 #
 # Indexes
 #
