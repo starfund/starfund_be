@@ -4,10 +4,6 @@ json.sub_price fighter.price_by_geo(geo)
 
 json.partial! 'api/v1/fighters/attachments', fighter: fighter
 
-json.attachments fighter.images do |attachment|
-  json.filename attachment.filename
-  json.url polymorphic_url(attachment)
-end
 json.public_videos fighter.public_videos do |attachment|
   json.filename attachment.filename
   json.url polymorphic_url(attachment)

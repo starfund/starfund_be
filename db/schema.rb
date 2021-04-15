@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_221822) do
+ActiveRecord::Schema.define(version: 2021_04_15_055224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 2021_04_12_221822) do
     t.datetime "last_charge_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status"
     t.index ["fighter_id"], name: "index_subscriptions_on_fighter_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end

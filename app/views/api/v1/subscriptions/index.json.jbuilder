@@ -1,5 +1,5 @@
 json.array! @subscriptions do |subscription|
-  json.extract! subscription, :id, :last_charge, :last_charge_date
+  json.extract! subscription, :id, :last_charge, :last_charge_date, :status
   json.fighter_picture polymorphic_url(subscription.fighter.profile_pic)
 
   json.user do
