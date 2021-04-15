@@ -71,8 +71,22 @@ ActiveAdmin.register Fighter do
     f.inputs do
       f.input :public_videos, as: :file, input_html: { multiple: true, direct_upload: true }
     end
+    if f.object.public_videos.attached?
+      f.object.public_videos.each do |video|
+        span do
+          video_tag(url_for(video), size: "200x200")
+        end
+      end
+    end
     f.inputs do
       f.input :private_videos, as: :file, input_html: { multiple: true, direct_upload: true }
+    end
+    if f.object.private_videos.attached?
+      f.object.private_videos.each do |video|
+        span do
+          video_tag(url_for(video), size: "200x200")
+        end
+      end
     end
     f.actions
   end
