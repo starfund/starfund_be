@@ -4,7 +4,6 @@ module Webhooks
 
   class StripeSubscriptionsController < ActionController::API
     before_action :verify_webhooks_enabled
-    skip_before_action :verify_authenticity_token, raise: false
 
     def update
       payload = request.body.read

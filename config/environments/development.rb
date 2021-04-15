@@ -14,6 +14,7 @@ Rails.application.configure do
 
   # Allow requests from the host defined in SERVER_HOST env variable
   config.hosts << ENV['SERVER_HOST']
+  config.hosts << ENV['NGROK_HOST']
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

@@ -25,4 +25,6 @@ Rails.application.routes.draw do
       resources :subscriptions
     end
   end
+
+  post '/stripe_subscription_notifications' => 'webhooks/stripe_subscriptions#update'
 end
