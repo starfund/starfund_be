@@ -15,10 +15,4 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-//= require activestorage
-//= require direct_upload
-
-import * as ActiveStorage from "@rails/activestorage"
-ActiveStorage.start()
-
 console.log('Hello World from Webpacker')

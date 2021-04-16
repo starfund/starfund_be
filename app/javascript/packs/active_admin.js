@@ -7,4 +7,5 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "@activeadmin/activeadmin";
 import "arctic_admin";
 import "./direct_upload";
-
+import * as ActiveStorage from "@rails/activestorage"
+ActiveStorage.start()
