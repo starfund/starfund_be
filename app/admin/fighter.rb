@@ -3,6 +3,11 @@ ActiveAdmin.register Fighter do
                 :birthdate, :cover_photo, :profile_pic, :preview_url, :price_tier_id,
                 public_videos: [], private_videos: []
 
+  member_action :delete_content, method: :put do
+    @pic = ActiveStorage::Attachment.find(params[:pic_id])
+    @pic.purge_later
+    redirect_backwards_or_to_root
+  end
 
   index do
     column :id
@@ -41,6 +46,9 @@ ActiveAdmin.register Fighter do
             li do
               video_tag(url_for(video), size: "200x200")
             end
+            li do
+              link_to "Delete", delete_content_admin_fighter_path(pic_id: video.id), method: :put
+            end
           end
         end
       end
@@ -49,6 +57,9 @@ ActiveAdmin.register Fighter do
           p.private_videos.each do |video|
             li do
               video_tag(url_for(video), size: "200x200")
+            end
+            li do
+              link_to "Delete", delete_content_admin_fighter_path(pic_id: video.id), method: :put
             end
           end
         end
