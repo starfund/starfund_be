@@ -20,7 +20,9 @@ module Api
       end
 
       def geo
-        request.location.country_code.downcase
+        # request.location.country_code.downcase
+        country_code = request.headers["Cf-Ipcountry"]
+        country_code.blank? ? "us" : country_code.downcase
       end
 
       private
