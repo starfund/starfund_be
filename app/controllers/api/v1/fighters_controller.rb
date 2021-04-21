@@ -5,7 +5,7 @@ module Api
       # skip_after_action :verify_policy_scoped
 
       def index
-        @geo = geo
+        @geo = 'us'
         @fighters = Fighter.all
       end
     end
