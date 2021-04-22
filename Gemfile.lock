@@ -261,6 +261,7 @@ GEM
     msgpack (1.4.2)
     multi_xml (0.6.0)
     mustache (1.1.1)
+    newrelic_rpm (6.15.0)
     nio4r (2.5.7)
     nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
@@ -496,6 +497,7 @@ DEPENDENCIES
   jbuilder (~> 2.10)
   letter_opener (~> 1.7)
   listen (~> 3.2)
+  newrelic_rpm
   oj (~> 3.9, >= 3.9.2)
   pagy (~> 3.7, >= 3.7.5)
   pg (~> 1.1, >= 1.1.4)
