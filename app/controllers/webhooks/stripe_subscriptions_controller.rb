@@ -1,18 +1,17 @@
+require "redis"
+
 module Webhooks
   class InvalidStripeWebhookRequest < ::StandardError; end
   class DuplicateStripeEvent < ::StandardError; end
 
   class StripeSubscriptionsController < ActionController::API
-    before_action :verify_webhooks_enabled
 
     def update
       payload = request.body.read
       sig_header = request.env['HTTP_STRIPE_SIGNATURE']
-
       begin
         event = validate_and_construct_event(payload, sig_header)
         handler = "handle_#{event.type.tr('.', '_')}".to_sym
-
         if respond_to?(handler, true)
           send(handler, event)
           mark_as_handled(sig_header, event)
@@ -21,13 +20,13 @@ module Webhooks
         head :ok
       rescue JSON::ParserError,
              Stripe::SignatureVerificationError,
-             InvalidStripeWebhookRequest => e
-        # log_and_track_exception(e)
+             InvalidStripeWebhookRequest => ex
+        Raygun.track_exception(ex)
         return render body: nil, status: 400
       rescue DuplicateStripeEvent
         head :ok
-      rescue StandardError => e
-        # log_and_track_exception(e)
+      rescue StandardError => ex
+        Raygun.track_exception(ex)
         return render body: nil, status: 500
       end
     end
@@ -48,29 +47,27 @@ module Webhooks
 
     def handle_invoice_payment_succeeded(event)
       invoice = event.data.object
+      byebug
       if invoice.subscription.present?
         stripe_sub = Stripe::Subscription.retrieve(invoice.subscription)
         if !stripe_sub.blank? && stripe_sub.status == 'active'
-          fighter = stripe_sub.fighter
-          StripeSubscriptionUpdateService.new(stripe_sub).update_subscription
+          fighter_sub = Subscription.find_by(stripe_sub: stripe_sub)
+
+          return unless fighter_sub
+          StripeSubscriptionUpdateService.new(stripe_sub, fighter_sub).update_subscription
         end
       end
     end
 
     private
 
-    def verify_webhooks_enabled
-      head :ok
-    end
-
     def redis
       @redis_ns ||= Redis::Namespace.new("stripe-wh-events", redis: init_redis)
     end
 
     def init_redis
-      ConnectionPool::Wrapper.new(size: configatron.connection_pool.redis.size,
-                                  timeout: configatron.connection_pool.redis.timeout) do
-        options = { url: ENV[ENV['REDIS'].to_s] || "redis://localhost:6379" }
+      ConnectionPool::Wrapper.new(size: 10, timeout: 3) do
+        options = { url: ENV[ENV['REDIS_URL'].to_s] || "redis://localhost:6379" }
         options[:logger] = Logger.new(Rails.root.join('log', 'redis.log')) if Rails.env.development?
         Redis.new(options)
       end
@@ -84,7 +81,9 @@ module Webhooks
       event = Stripe::Webhook.construct_event(payload, sig_header, ENV['STRIPE_WEBHOOK_SECRET'])
 
       # TODO: proceed only if event id does not exist in redis
-      raise DuplicateStripeEvent if redis.exists(event.id)
+      unless  Rails.env.development?
+        raise DuplicateStripeEvent if redis.exists(event.id)
+      end
 
       event
     end

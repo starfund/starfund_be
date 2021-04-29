@@ -129,6 +129,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.8)
+    connection_pool (2.2.5)
     countries (3.1.0)
       i18n_data (~> 0.11.0)
       sixarm_ruby_unaccent (~> 1.1)
@@ -346,6 +347,9 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.2.5)
+    redis-namespace (1.8.1)
+      redis (>= 3.0.4)
     reek (5.6.0)
       codeclimate-engine-rb (~> 0.4.0)
       kwalify (~> 0.7.0)
@@ -483,6 +487,7 @@ DEPENDENCIES
   bootsnap (~> 1.4, >= 1.4.5)
   brakeman (~> 4.8)
   bullet (~> 6.1)
+  connection_pool
   country_select (~> 4.0)
   delayed_job_active_record (~> 4.1, >= 4.1.4)
   devise (~> 4.7, >= 4.7.2)
@@ -509,6 +514,8 @@ DEPENDENCIES
   rails (~> 6.0.0)
   rails_best_practices (~> 1.20)
   raygun4ruby
+  redis
+  redis-namespace
   reek (~> 5.5)
   rspec-rails (~> 3.9)
   rspec_api_documentation (~> 6.1.0)
