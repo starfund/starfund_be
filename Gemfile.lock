@@ -408,11 +408,14 @@ GEM
       rubocop (>= 0.72, < 2)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
+    ruby_http_client (3.5.2)
     sassc (2.4.0)
       ffi (~> 1.9)
     semantic_range (3.0.0)
     sendgrid (1.2.4)
       json
+    sendgrid-ruby (6.4.0)
+      ruby_http_client (~> 3.4)
     sexp_processor (4.15.2)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
@@ -522,6 +525,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.3, >= 2.3.2)
   rubocop-rootstrap (~> 1.2)
   sendgrid (~> 1.2.4)
+  sendgrid-ruby
   shoulda-matchers (~> 4.1, >= 4.1.2)
   simplecov (~> 0.13.0)
   spring (~> 2.1)

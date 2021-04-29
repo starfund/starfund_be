@@ -70,8 +70,7 @@ Rails.application.configure do
     address: ENV.fetch('SMTP_ADDRESS'),
     domain: ENV.fetch('SMTP_DOMAIN'),
     port: ENV.fetch('SMTP_PORT'),
-    authentication: ENV.fetch('SMTP_AUTHENTICATION', '').to_sym,
-    enable_starttls_auto: ENV.fetch('SMTP_ENABLE_STARTTLS_AUTO', 'true') == 'true'
+    authentication: ENV.fetch('SMTP_AUTHENTICATION', '').to_sym
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
