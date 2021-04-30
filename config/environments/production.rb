@@ -65,13 +65,13 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: 'starfund-prod.heroku.com' }
+  config.action_mailer.default_url_options = { host: 'starfund-prod.herokuapp.com' }
   config.action_mailer.smtp_settings = {
-    user_name: ENV.fetch('SMTP_USER_NAME'),
-    password: ENV.fetch('SMTP_PASSWORD'),
-    address: ENV.fetch('SMTP_ADDRESS'),
-    domain: ENV.fetch('SMTP_DOMAIN'),
-    port: ENV.fetch('SMTP_PORT'),
+    user_name: ENV.fetch('MAILGUN_SMTP_LOGIN'),
+    password: ENV.fetch('MAILGUN_SMTP_PASSWORD'),
+    address: ENV.fetch('MAILGUN_SMTP_SERVER'),
+    domain: ENV.fetch('MAILGUN_SMTP_SERVER'),
+    port: ENV.fetch('MAILGUN_SMTP_PORT'),
     authentication: ENV.fetch('SMTP_AUTHENTICATION', '').to_sym
   }
 
