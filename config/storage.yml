@@ -12,3 +12,5 @@ amazon:
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   bucket: <%= ENV['S3_BUCKET_NAME'] %>
   region: <%= ENV['AWS_BUCKET_REGION'] %>
+  upload:
+    cache_control: 'max-age=86400, private'
