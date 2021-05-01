@@ -47,7 +47,7 @@ module Webhooks
 
     def handle_invoice_payment_succeeded(event)
       invoice = event.data.object
-      byebug
+
       if invoice.subscription.present?
         stripe_sub = Stripe::Subscription.retrieve(invoice.subscription)
         if !stripe_sub.blank? && stripe_sub.status == 'active'
