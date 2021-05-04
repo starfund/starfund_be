@@ -36,4 +36,8 @@ class Fighter < ApplicationRecord
 
     price_tier.us
   end
+
+  def public_content
+    contents.where(public: true)
+  end
 end
