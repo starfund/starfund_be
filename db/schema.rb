@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_03_222229) do
+ActiveRecord::Schema.define(version: 2021_05_04_230720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -64,6 +64,10 @@ ActiveRecord::Schema.define(version: 2021_05_03_222229) do
     t.boolean "public", default: true
     t.boolean "feed", default: true
     t.boolean "published", default: false
+    t.string "title_ru"
+    t.string "description_ru"
+    t.string "title_es"
+    t.string "description_es"
     t.index ["fighter_id"], name: "index_contents_on_fighter_id"
   end
 

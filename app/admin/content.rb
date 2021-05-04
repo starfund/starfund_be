@@ -1,15 +1,34 @@
 ActiveAdmin.register Content do
   permit_params :id, :title, :event_date, :description,
                 :fighter_id, :image, :video, :public, :published,
-                :feed
+                :feed, :title_ru, :title_es, :description_ru,
+                :description_es
+
+  index do
+    column :id
+    column :title
+    column :description
+    column :title_ru
+    column :description_ru
+    column :title_es
+    column :description_es
+    column :event_date
+    column :public
+    column :feed
+    column :published
+
+    actions
+  end
 
   show do
     attributes_table do
       row :id
       row :fighter
       row :title
+      row :title_ru
       row :event_date
       row :description
+      row :description_ru
       row :public
       row :feed
       row :published
@@ -25,6 +44,10 @@ ActiveAdmin.register Content do
   form do |f|
     input :title
     input :description
+    input :title_ru
+    input :description_ru
+    input :title_es
+    input :description_es
     input :fighter
     input :event_date
     input :public
