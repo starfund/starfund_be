@@ -11,7 +11,7 @@ json.subscriptions do
     end
     
     json.content subscription.fighter.contents.filter{|c| c.public == false } do |content|
-      json.extract! content, :title, :description, :event_date
+      json.extract! content, :title, :description, :event_date, :feed
       json.image polymorphic_url(content.image) if content.image.attached?
       json.video polymorphic_url(content.video) if content.video.attached?
     end
