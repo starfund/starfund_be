@@ -4,11 +4,11 @@ json.sub_price fighter.price_by_geo(geo)
 
 json.partial! 'api/v1/fighters/attachments', fighter: fighter
 
-json.public_videos fighter.public_videos do |attachment|
-  json.filename attachment.filename
-  json.url polymorphic_url(attachment)
-end
-json.private_videos fighter.private_videos do |attachment|
-  json.filename attachment.filename
-  json.url polymorphic_url(attachment)
+if content
+  json.public_videos fighter.contents.filter{|c| c.public == true} do |attachment|
+    json.partial! 'api/v1/contents/show', content: attachment
+  end
+  json.private_videos fighter.contents.filter{|c| c.public == false} do |attachment|
+    json.partial! 'api/v1/contents/show', content: attachment
+  end
 end

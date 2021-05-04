@@ -10,6 +10,8 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  public      :boolean          default(TRUE)
+#  feed        :boolean          default(TRUE)
+#  published   :boolean          default(FALSE)
 #
 # Indexes
 #

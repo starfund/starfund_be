@@ -1,6 +1,7 @@
 ActiveAdmin.register Content do
   permit_params :id, :title, :event_date, :description,
-                :fighter_id, :image, :video, :public
+                :fighter_id, :image, :video, :public, :published,
+                :feed
 
   show do
     attributes_table do
@@ -10,6 +11,8 @@ ActiveAdmin.register Content do
       row :event_date
       row :description
       row :public
+      row :feed
+      row :published
       row "Image" do |c|
         image_tag(url_for(c.image), size: "200x200") if c.image.attached?
       end
@@ -25,6 +28,7 @@ ActiveAdmin.register Content do
     input :fighter
     input :event_date
     input :public
+    input :feed
     f.input :image, as: :file, input_html: { direct_upload: true }
     f.input :video, as: :file, input_html: { direct_upload: true }
 
