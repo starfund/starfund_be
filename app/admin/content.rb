@@ -8,6 +8,7 @@ ActiveAdmin.register Content do
     column :id
     column :title
     column :description
+    column :fighter
     column :title_ru
     column :description_ru
     column :title_es
