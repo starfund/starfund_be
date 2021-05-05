@@ -67,7 +67,7 @@ module Webhooks
 
     def init_redis
       ConnectionPool::Wrapper.new(size: 10, timeout: 3) do
-        options = { url: ENV['REDIS_URL'].to_s] || "redis://localhost:6379" }
+        options = { url: ENV['REDIS_URL'].to_s || "redis://localhost:6379" }
         options[:logger] = Logger.new(Rails.root.join('log', 'redis.log')) if Rails.env.development?
         Redis.new(options)
       end
