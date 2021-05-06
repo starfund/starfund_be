@@ -4,6 +4,12 @@ ActiveAdmin.register Content do
                 :feed, :title_ru, :title_es, :description_ru,
                 :description_es
 
+  member_action :delete_content, method: :put do
+    @pic = ActiveStorage::Attachment.find(params[:pic_id])
+    @pic.purge_later
+    redirect_backwards_or_to_root
+  end
+
   index do
     column :id
     column :title
@@ -34,10 +40,20 @@ ActiveAdmin.register Content do
       row :feed
       row :published
       row "Image" do |c|
-        image_tag(url_for(c.image), size: "200x200") if c.image.attached?
+        if c.image.attached?
+          ul do
+            li do image_tag(url_for(c.image), size: "200x200") end
+            li do link_to "Delete", delete_content_admin_content_path(pic_id: c.id), method: :put end
+          end
+        end
       end
       row "Video" do |c|
-        video_tag(url_for(c.video), size: "200x200") if c.video.attached?
+        if c.video.attached?
+          ul do
+            li do video_tag(url_for(c.video), size: "200x200") end
+            li do link_to "Delete", delete_content_admin_content_path(pic_id: c.id), method: :put end
+          end
+        end
       end
     end
   end
