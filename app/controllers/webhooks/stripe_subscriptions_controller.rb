@@ -51,7 +51,7 @@ module Webhooks
       if invoice.subscription.present?
         stripe_sub = Stripe::Subscription.retrieve(invoice.subscription)
         if !stripe_sub.blank? && stripe_sub.status == 'active'
-          fighter_sub = Subscription.find_by(stripe_sub: stripe_sub)
+          fighter_sub = Subscription.find_by(stripe_sub: stripe_sub.id)
 
           return unless fighter_sub
           StripeSubscriptionUpdateService.new(stripe_sub, fighter_sub).update_subscription
