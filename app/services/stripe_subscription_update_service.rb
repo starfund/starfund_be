@@ -18,7 +18,6 @@ class StripeSubscriptionUpdateService
   end
 
   def renew_sub
-    byebub
     ending_date = Date.strptime(stripe_sub.period_end,'%s')
     subscription.renew
     subscription.update(last_charge_date: ending_date)
