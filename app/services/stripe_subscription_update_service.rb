@@ -19,7 +19,7 @@ class StripeSubscriptionUpdateService
 
   def renew_sub
     ending_date = Date.strptime(stripe_sub.current_period_end.to_s, '%s')
-    subscription.renew
+    subscription.renew unless subscription.active?
     subscription.update(last_charge_date: ending_date)
   end
 
