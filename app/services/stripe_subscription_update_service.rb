@@ -18,9 +18,9 @@ class StripeSubscriptionUpdateService
   end
 
   def renew_sub
-    ending_date = Date.strptime(stripe_sub.current_period_end.to_s, '%s')
+    new_start_date = Date.strptime(stripe_sub.current_period_start.to_s, '%s')
     subscription.renew unless subscription.active?
-    subscription.update(last_charge_date: ending_date)
+    subscription.update(last_charge_date: new_start_date)
   end
 
   def cancel_sub
