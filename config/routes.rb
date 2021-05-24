@@ -20,11 +20,16 @@ Rails.application.routes.draw do
       resources :settings, only: [] do
         get :must_update, on: :collection
       end
-      resources :fighters
+      resources :comments
       resources :credit_cards
+      resources :fighters
       resources :subscriptions
     end
   end
 
+  # Webhooks
   post '/stripe_subscription_notifications' => 'webhooks/stripe_subscriptions#update'
+
+  # Engines
+  mount ActionCable.server => '/cable'
 end

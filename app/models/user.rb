@@ -43,6 +43,7 @@ class User < ApplicationRecord
 
   has_many :credit_cards
   has_many :subscriptions
+  has_many :comments
 
   before_validation :init_uid
 
