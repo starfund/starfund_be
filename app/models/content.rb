@@ -2,20 +2,22 @@
 #
 # Table name: contents
 #
-#  id             :bigint           not null, primary key
-#  fighter_id     :bigint           not null
-#  title          :string
-#  description    :string
-#  event_date     :date
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  public         :boolean          default(TRUE)
-#  feed           :boolean          default(TRUE)
-#  published      :boolean          default(FALSE)
-#  title_ru       :string
-#  description_ru :string
-#  title_es       :string
-#  description_es :string
+#  id               :bigint           not null, primary key
+#  fighter_id       :bigint           not null
+#  title            :string
+#  description      :string
+#  event_date       :date
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  public           :boolean          default(TRUE)
+#  feed             :boolean          default(TRUE)
+#  published        :boolean          default(FALSE)
+#  title_ru         :string
+#  description_ru   :string
+#  title_es         :string
+#  description_es   :string
+#  fake_likes_count :integer          default(0)
+#  likes_count      :bigint           default(0)
 #
 # Indexes
 #
@@ -26,4 +28,8 @@ class Content < ApplicationRecord
 
   has_one_attached :image
   has_one_attached :video
+
+  def total_likes
+    likes_count + fake_likes_count
+  end
 end

@@ -1,4 +1,5 @@
 json.title content.title
+json.likes content.total_likes
 json.description content.description
 json.title_ru content.title_ru
 json.description_ru content.description_ru

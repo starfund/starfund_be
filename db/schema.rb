@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_04_230720) do
+ActiveRecord::Schema.define(version: 2021_05_24_180400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 2021_05_04_230720) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "content_id", null: false
+    t.string "message"
+    t.index ["content_id"], name: "index_comments_on_content_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "contents", force: :cascade do |t|
     t.bigint "fighter_id", null: false
     t.string "title"
@@ -68,6 +76,8 @@ ActiveRecord::Schema.define(version: 2021_05_04_230720) do
     t.string "description_ru"
     t.string "title_es"
     t.string "description_es"
+    t.integer "fake_likes_count", default: 0
+    t.bigint "likes_count", default: 0
     t.index ["fighter_id"], name: "index_contents_on_fighter_id"
   end
 
@@ -199,6 +209,8 @@ ActiveRecord::Schema.define(version: 2021_05_04_230720) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "comments", "contents"
+  add_foreign_key "comments", "users"
   add_foreign_key "contents", "fighters"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "exception_hunter_errors", "exception_hunter_error_groups", column: "error_group_id"

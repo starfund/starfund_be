@@ -2,7 +2,7 @@ ActiveAdmin.register Content do
   permit_params :id, :title, :event_date, :description,
                 :fighter_id, :image, :video, :public, :published,
                 :feed, :title_ru, :title_es, :description_ru,
-                :description_es
+                :description_es, :fake_likes_count
 
   member_action :delete_content, method: :put do
     @pic = ActiveStorage::Attachment.find(params[:pic_id])
@@ -15,6 +15,8 @@ ActiveAdmin.register Content do
     column :title
     column :description
     column :fighter
+    column :likes_count
+    column :fake_likes_count
     column :title_ru
     column :description_ru
     column :title_es
@@ -31,6 +33,8 @@ ActiveAdmin.register Content do
     attributes_table do
       row :id
       row :fighter
+      row :fake_likes_count
+      row :likes_count
       row :title
       row :title_ru
       row :event_date
@@ -61,6 +65,7 @@ ActiveAdmin.register Content do
   form do |f|
     input :title
     input :description
+    input :fake_likes_count
     input :title_ru
     input :description_ru
     input :title_es
