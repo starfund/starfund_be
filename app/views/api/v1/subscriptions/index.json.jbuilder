@@ -21,6 +21,7 @@ end
 json.public_content do
   json.array! @public_content do |content|
     json.extract! content, :title, :description, :event_date, :feed, :title_ru, :title_es, :description_ru, :description_es
+    json.likes content.total_likes
     json.fighter_id content.fighter.id
     json.fighter_name content.fighter.first_name
     json.partial! 'api/v1/fighters/attachments', fighter: content.fighter
