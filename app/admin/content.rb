@@ -65,7 +65,7 @@ ActiveAdmin.register Content do
   form do |f|
     input :title
     input :description
-    input :fake_likes_count
+    input :fake_likes_count, as: :number
     input :title_ru
     input :description_ru
     input :title_es
