@@ -1,4 +1,4 @@
-class CommentsChannel < ApplicationCable::Channel
+class CommentChannel < ApplicationCable::Channel
   def subscribed
     content = Content.find(params[:content_id])
     stream_for(content)

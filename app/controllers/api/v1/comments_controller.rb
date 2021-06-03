@@ -1,8 +1,8 @@
 module Api
   module V1
     class CommentsController < Api::V1::ApiController
-      include Concerns::ActAsApiRequest
-      protect_from_forgery with: :null_session
+      # include Concerns::ActAsApiRequest
+      # protect_from_forgery with: :null_session
 
       helper_method :content
 

@@ -24,6 +24,12 @@ Rails.application.routes.draw do
       resources :credit_cards
       resources :fighters
       resources :subscriptions
+      resources :contents do
+        member do
+          post :like
+          post :unlike
+        end
+      end
     end
   end
 

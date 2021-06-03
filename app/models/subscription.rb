@@ -47,4 +47,8 @@ class Subscription < ApplicationRecord
     end
   end
 
+  def private_content
+    fighter.private_content
+  end
+
 end

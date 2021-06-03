@@ -10,7 +10,7 @@ module CommentService
 
   def broadcast_message(content, message)
     message_data = form_message_data(message)
-    CommentsChannel.broadcast_to(content, message_data)
+    CommentChannel.broadcast_to(content, message_data)
   end
 
   def form_message_data(comment)

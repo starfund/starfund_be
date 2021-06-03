@@ -40,4 +40,8 @@ class Fighter < ApplicationRecord
   def public_content
     contents.where(public: true)
   end
+
+  def private_content
+    contents.where(public: false)
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_180400) do
+ActiveRecord::Schema.define(version: 2021_05_26_164129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -182,6 +182,13 @@ ActiveRecord::Schema.define(version: 2021_05_24_180400) do
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
+  create_table "user_likes", force: :cascade do |t|
+    t.bigint "content_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["content_id"], name: "index_user_likes_on_content_id"
+    t.index ["user_id"], name: "index_user_likes_on_user_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email"
     t.string "encrypted_password", default: "", null: false
@@ -217,4 +224,6 @@ ActiveRecord::Schema.define(version: 2021_05_24_180400) do
   add_foreign_key "fighters", "price_tiers"
   add_foreign_key "subscriptions", "fighters"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "user_likes", "contents"
+  add_foreign_key "user_likes", "users"
 end
