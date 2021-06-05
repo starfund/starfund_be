@@ -1,7 +1,7 @@
 ActiveAdmin.register Fighter do
   permit_params :id, :email, :first_name, :last_name, :country, :reach, :height, :organization,
                 :birthdate, :cover_photo, :profile_pic, :preview_url, :price_tier_id,
-                public_videos: [], private_videos: []
+                :content_id, public_videos: [], private_videos: []
 
   member_action :delete_content, method: :put do
     @pic = ActiveStorage::Attachment.find(params[:pic_id])
@@ -40,28 +40,9 @@ ActiveAdmin.register Fighter do
       row "Cover Photo" do |p|
         image_tag(url_for(p.cover_photo), size: "200x200")
       end
-      row "Previews" do |p|
-        ul do
-          p.public_videos.each do |video|
-            li do
-              video_tag(url_for(video), size: "200x200")
-            end
-            li do
-              link_to "Delete", delete_content_admin_fighter_path(pic_id: video.id), method: :put
-            end
-          end
-        end
-      end
-      row "Private content" do |p|
-        ul do
-          p.private_videos.each do |video|
-            li do
-              video_tag(url_for(video), size: "200x200")
-            end
-            li do
-              link_to "Delete", delete_content_admin_fighter_path(pic_id: video.id), method: :put
-            end
-          end
+      row "Official Preview" do |p|
+        if p.content
+          video_tag(url_for(p.content.video), size: "200x200")
         end
       end
     end
@@ -79,26 +60,7 @@ ActiveAdmin.register Fighter do
     input :preview_url
     f.input :cover_photo, as: :file
     f.input :profile_pic, as: :file
-    f.inputs do
-      f.input :public_videos, as: :file, input_html: { multiple: true, direct_upload: true }
-    end
-    if f.object.public_videos.attached?
-      f.object.public_videos.each do |video|
-        span do
-          video_tag(url_for(video), size: "200x200")
-        end
-      end
-    end
-    f.inputs do
-      f.input :private_videos, as: :file, input_html: { multiple: true, direct_upload: true }
-    end
-    if f.object.private_videos.attached?
-      f.object.private_videos.each do |video|
-        span do
-          video_tag(url_for(video), size: "200x200")
-        end
-      end
-    end
+    input :content
     f.actions
   end
 end

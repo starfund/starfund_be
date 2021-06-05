@@ -13,13 +13,16 @@
 #  preview_url   :string
 #  sub_price     :integer
 #  price_tier_id :bigint           default(1), not null
+#  content_id    :bigint
 #
 # Indexes
 #
+#  index_fighters_on_content_id     (content_id)
 #  index_fighters_on_price_tier_id  (price_tier_id)
 #
 class Fighter < ApplicationRecord
   belongs_to :price_tier
+  belongs_to :content, optional: true # Official prview
   has_many :contents
 
   has_many_attached :public_videos
