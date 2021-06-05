@@ -60,7 +60,7 @@ ActiveAdmin.register Fighter do
     input :preview_url
     f.input :cover_photo, as: :file
     f.input :profile_pic, as: :file
-    input :content
+    input :content, as: :select, collection: resource.contents
     f.actions
   end
 end
