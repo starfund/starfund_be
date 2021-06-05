@@ -7,7 +7,7 @@ module Api
       helper_method :content
 
       def index
-        @comments = Comments.where(content_id: param[:content_id])
+        @comments = Comment.where(content_id: params[:content_id])
       end
 
       def create
@@ -15,7 +15,7 @@ module Api
       end
 
       def delete
-        @content = Content.destroy(param[:content_id])
+        @content = Content.destroy(params[:content_id])
       end
 
       private
