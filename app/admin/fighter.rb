@@ -1,7 +1,7 @@
 ActiveAdmin.register Fighter do
   permit_params :id, :email, :first_name, :last_name, :country, :reach, :height, :organization,
                 :birthdate, :cover_photo, :profile_pic, :preview_url, :price_tier_id,
-                :content_id, public_videos: [], private_videos: []
+                :content_id, :support, public_videos: [], private_videos: []
 
   member_action :delete_content, method: :put do
     @pic = ActiveStorage::Attachment.find(params[:pic_id])
@@ -19,6 +19,7 @@ ActiveAdmin.register Fighter do
     column :birthdate
     column :organization
     column :price_tier
+    column :support
     column :preview_url
 
     actions
@@ -32,6 +33,7 @@ ActiveAdmin.register Fighter do
       row :reach
       row :height
       row :price_tier
+      row :support
       row :birthdate
       row :organization
       row "Profile Picture" do |p|
@@ -55,9 +57,10 @@ ActiveAdmin.register Fighter do
     input :reach
     input :height
     input :price_tier, include_blank: false
-    input :birthdate, start_year: 1900
+    input :birthdate, start_year: 1970
     input :organization
     input :preview_url
+    input :support, label: 'Likes support word'
     f.input :cover_photo, as: :file
     f.input :profile_pic, as: :file
     input :content, as: :select, collection: resource.contents

@@ -1,4 +1,4 @@
-json.extract! fighter, :id, :first_name, :last_name, :country, :reach, :height, :birthdate, :organization, :preview_url
+json.extract! fighter, :id, :first_name, :last_name, :country, :reach, :height, :birthdate, :organization, :preview_url, :support
 
 json.sub_price fighter.price_by_geo(geo)
 

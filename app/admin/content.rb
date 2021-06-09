@@ -71,7 +71,7 @@ ActiveAdmin.register Content do
     input :title_es
     input :description_es
     input :fighter
-    input :event_date
+    input :event_date, start_year: 1990
     input :public
     input :feed
     f.input :image, as: :file, input_html: { direct_upload: true }

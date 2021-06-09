@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_05_054719) do
+ActiveRecord::Schema.define(version: 2021_06_09_041915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_054719) do
     t.integer "sub_price"
     t.bigint "price_tier_id", default: 1, null: false
     t.bigint "content_id"
+    t.boolean "support", default: false
     t.index ["content_id"], name: "index_fighters_on_content_id"
     t.index ["price_tier_id"], name: "index_fighters_on_price_tier_id"
   end

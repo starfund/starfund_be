@@ -14,6 +14,7 @@
 #  sub_price     :integer
 #  price_tier_id :bigint           default(1), not null
 #  content_id    :bigint
+#  support       :boolean          default(FALSE)
 #
 # Indexes
 #
