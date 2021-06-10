@@ -19,12 +19,19 @@ ActiveAdmin.register Content do
     column :fake_likes_count
     column :title_ru
     column :description_ru
-    column :title_es
-    column :description_es
     column :event_date
+    column 'Type' do |c|
+      if c.image.attached?
+        "Image"
+      elsif c.video.attached?
+        "Video"
+      end
+    end
     column :public
     column :feed
     column :published
+    column :title_es
+    column :description_es
 
     actions
   end
