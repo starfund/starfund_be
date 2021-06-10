@@ -30,6 +30,7 @@ class Content < ApplicationRecord
 
   has_one_attached :image
   has_one_attached :video
+  has_one_attached :video_thumbnail
 
   def total_likes
     likes_count + fake_likes_count
