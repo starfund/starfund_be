@@ -17,9 +17,11 @@ module CommentService
     user = comment.user
     {
       action: 'new_message',
+      contentId: comment.id,
       content: comment.message,
       user: user.username,
-      user_id: user.id,
+      userName: user.full_name,
+      userId: user.id,
       date: Time.zone.now.iso8601
     }
   end

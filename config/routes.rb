@@ -28,6 +28,8 @@ Rails.application.routes.draw do
         member do
           post :like
           post :unlike
+
+          resources :comments, only: :create
         end
       end
     end
