@@ -43,11 +43,11 @@ class StripeService
     end
   end
 
-  def create_payment
+  def create_payment(price)
     Stripe::Charge.create({
-      amount: 100,
-      currency: 'usd',
-      description: 'Example charge',
+      amount: price,
+      currency: currency,
+      description: 'PPV Charge',
       customer: user.customer_id,
       source: user.card_id,
     })

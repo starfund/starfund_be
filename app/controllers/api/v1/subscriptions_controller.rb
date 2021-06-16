@@ -17,7 +17,14 @@ module Api
         create_provision_user unless user.present?
         return render_internal_error(StandardError.new "Already subscribed") if already_subscribed
 
-        @subscription = SubscriptionService.new(user, fighter, geo).process(card, price, fighter.id)
+        @subscription = SubscriptionService.new(user, fighter, geo).process(card, price)
+      end
+
+      def ppv
+        @newbie = !current_user.present?
+        create_provision_user unless user.present?
+
+        @charge = ChargeService.new(user, fighter, geo).process(card, price)
       end
 
       private
