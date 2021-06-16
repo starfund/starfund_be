@@ -22,6 +22,7 @@ module CommentService
       user: user.username,
       userName: user.full_name,
       userId: user.id,
+      id: comment.id,
       date: Time.zone.now.iso8601
     }
   end
