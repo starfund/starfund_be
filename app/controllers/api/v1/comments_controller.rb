@@ -1,8 +1,7 @@
 module Api
   module V1
     class CommentsController < Api::V1::ApiController
-      # include Concerns::ActAsApiRequest
-      # protect_from_forgery with: :null_session
+      skip_before_action :authenticate_user!, only: :index
       helper_method :content
 
       def index
