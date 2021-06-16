@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_041915) do
+ActiveRecord::Schema.define(version: 2021_06_16_014824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(version: 2021_06_09_041915) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "charges", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "fighter_id"
+    t.string "reason"
+    t.integer "amount"
+    t.index ["fighter_id"], name: "index_charges_on_fighter_id"
+    t.index ["user_id"], name: "index_charges_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -219,6 +228,8 @@ ActiveRecord::Schema.define(version: 2021_06_09_041915) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "charges", "fighters"
+  add_foreign_key "charges", "users"
   add_foreign_key "comments", "contents"
   add_foreign_key "comments", "users"
   add_foreign_key "contents", "fighters"

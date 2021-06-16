@@ -14,7 +14,7 @@ class ChargeService
         stripe_service.add_card(token_id, user.email, user.full_name) 
       end
       stripe_charge = stripe_service.create_payment(price)
-      # Create Charge for ppv
+      Charge.create(user: user, fighter: fighter, reason: 'ppv', amount: price)
     end
   end
 end
