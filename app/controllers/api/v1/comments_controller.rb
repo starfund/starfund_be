@@ -1,9 +1,7 @@
 module Api
   module V1
     class CommentsController < Api::V1::ApiController
-      # include Concerns::ActAsApiRequest
-      # protect_from_forgery with: :null_session
-
+      skip_before_action :authenticate_user!, only: :index
       helper_method :content
 
       def index
@@ -11,7 +9,7 @@ module Api
       end
 
       def create
-        @content = CommentService.create_message(content, params[:message], current_user)
+        @comment = CommentService.create_message(content, params[:message], current_user)
       end
 
       def delete
@@ -21,7 +19,7 @@ module Api
       private
 
       def content
-        @content ||= Content.find(params[:content_id])
+        @content ||= Content.find(params[:id])
       end
     end
   end
