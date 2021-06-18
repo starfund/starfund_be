@@ -8,7 +8,7 @@ module Api
 
       def index
         @geo = geo
-        @subscriptions = user.subscriptions
+        @subscriptions = user.active_subscriptions
         @public_content = Fighter.includes(:contents).map(&:public_content).flatten
       end
 
