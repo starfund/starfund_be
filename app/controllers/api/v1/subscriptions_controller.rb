@@ -23,7 +23,7 @@ module Api
         @newbie = !current_user.present?
         create_provision_user unless user.present?
 
-        @charge = ChargeService.new(user, fighter, geo).process(card, price)
+        @charge = ChargeService.new(user, fighter, geo).process(card, ppv_price)
       end
 
       private
@@ -63,6 +63,10 @@ module Api
 
       def card
         params[:token][:id]
+      end
+
+      def ppv_price
+        1000
       end
     end
   end
