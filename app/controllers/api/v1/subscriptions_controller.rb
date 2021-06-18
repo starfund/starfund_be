@@ -4,11 +4,10 @@ module Api
       helper_method :user
 
       skip_before_action :authenticate_user!
-      # skip_after_action :verify_policy_scoped
 
       def index
         @geo = geo
-        @subscriptions = user.subscriptions
+        @subscriptions = user&.subscriptions || []
         @public_content = Fighter.includes(:contents).map(&:public_content).flatten
       end
 

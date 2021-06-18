@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_16_014824) do
+ActiveRecord::Schema.define(version: 2021_06_17_225108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -165,6 +165,15 @@ ActiveRecord::Schema.define(version: 2021_06_16_014824) do
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
+  create_table "petitions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "topic"
+    t.string "requester"
+    t.string "receiver"
+    t.string "explanation"
+    t.index ["user_id"], name: "index_petitions_on_user_id"
+  end
+
   create_table "price_tiers", force: :cascade do |t|
     t.integer "us"
     t.integer "ru"
@@ -237,6 +246,7 @@ ActiveRecord::Schema.define(version: 2021_06_16_014824) do
   add_foreign_key "exception_hunter_errors", "exception_hunter_error_groups", column: "error_group_id"
   add_foreign_key "fighters", "contents"
   add_foreign_key "fighters", "price_tiers"
+  add_foreign_key "petitions", "users"
   add_foreign_key "subscriptions", "fighters"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "user_likes", "contents"

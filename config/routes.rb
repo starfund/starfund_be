@@ -28,6 +28,11 @@ Rails.application.routes.draw do
           post :ppv
         end
       end
+      resources :petitions, only: [] do
+        collection do
+          post :dream
+        end
+      end
       resources :contents do
         member do
           post :like
