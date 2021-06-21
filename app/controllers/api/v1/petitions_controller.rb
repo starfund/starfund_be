@@ -5,9 +5,9 @@ module Api
         @petition = Petition.create(
                       user: current_user,
                       topic: Petition.topics[:ppv],
-                      requester: params[:requestor],
-                      receiver: params[:emailReceptor],
-                      explanation: params[:text]
+                      requester: params[:dream][0][:receptor],
+                      receiver: params[:dream][0][:email_receptor],
+                      explanation: params[:dream][0][:text]
                     )
       end
     end
