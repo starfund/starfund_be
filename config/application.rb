@@ -16,8 +16,7 @@ module App
     config.autoloader = :classic
 
     config.add_autoload_paths_to_load_path = false
-    config.action_mailer.default_url_options = { host: ENV['SMTP_DOMAIN'],
-                                                 port: ENV.fetch('PORT', 3000) }
+    config.action_mailer.default_url_options = { host: ENV['SMTP_DOMAIN'] }
     config.action_mailer.default_options = {
       from: 'support@starfund.app'
     }
