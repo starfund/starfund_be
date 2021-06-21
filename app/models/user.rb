@@ -58,6 +58,10 @@ class User < ApplicationRecord
     credit_cards.find_by(default: true)
   end
 
+  def active_subscriptions
+    subscriptions.filter(&:active?)
+  end
+
   def has_sub(fighter)
     return false if subscriptions.empty?
 
