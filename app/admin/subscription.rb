@@ -8,6 +8,7 @@ ActiveAdmin.register Subscription do
     column :status
     column :last_charge
     column :last_charge_date
+    column :created_at
 
     actions
   end
@@ -20,6 +21,7 @@ ActiveAdmin.register Subscription do
       row :status
       row :last_charge
       row :last_charge_date
+      row :created_at
     end
   end
 end
