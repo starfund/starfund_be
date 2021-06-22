@@ -16,4 +16,7 @@ if content.image.attached?
 end
 if content.video.attached?
   json.video polymorphic_url(content.video)
+  if content.video_thumbnail.attached?
+    json.thumbnail polymorphic_url(content.video_thumbnail)
+  end
 end
