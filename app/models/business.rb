@@ -9,6 +9,7 @@
 #  category      :string
 #  price_tier_id :bigint           not null
 #  content_id    :bigint
+#  slogan        :string
 #
 # Indexes
 #
