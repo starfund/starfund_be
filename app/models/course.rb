@@ -20,4 +20,6 @@ class Course < ApplicationRecord
 
   belongs_to :business
   has_many :course_schedules
+
+  has_one_attached :cover_photo
 end
