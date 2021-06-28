@@ -12,11 +12,11 @@ json.title_es content.title_es
 json.description_es content.description_es
 json.event_date content.event_date
 if content.image.attached?
-  json.image polymorphic_url(content.image)
+  json.image cache_url(content.image)
 end
 if content.video.attached?
-  json.video polymorphic_url(content.video)
+  json.video cache_url(content.video)
   if content.video_thumbnail.attached?
-    json.thumbnail polymorphic_url(content.video_thumbnail)
+    json.thumbnail cache_url(content.video_thumbnail)
   end
 end

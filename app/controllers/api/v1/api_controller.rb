@@ -1,7 +1,7 @@
 module Api
   module V1
     class ApiController < ActionController::API
-      helper_method :geo
+      helper_method :geo, :cache_url
       # include Pundit
       include DeviseTokenAuth::Concerns::SetUserByToken
 
@@ -23,6 +23,15 @@ module Api
         # request.location.country_code.downcase
         country_code = request.headers["Cf-Ipcountry"]
         country_code.blank? ? "us" : country_code.downcase
+      end
+
+      def cache_url(resource)
+        if(ENV['CLOUDFRONT_URL'])
+          s3_url = "https://#{ENV['S3_BUCKET_NAME']}.s3.#{ENV['AWS_BUCKET_REGION']}.amazonaws.com"
+          resource.service_url.gsub(s3_url, ENV['CLOUDFRONT_URL'])
+        else
+          polymorphic_url(resource, only_path: true)
+        end
       end
 
       private

@@ -1,5 +1,5 @@
-json.profile_picture polymorphic_url(fighter.profile_pic)
-json.cover_photo polymorphic_url(fighter.cover_photo)
+json.profile_picture cache_url(fighter.profile_pic)
+json.cover_photo cache_url(fighter.cover_photo)
 if fighter.content
-  json.official_preview polymorphic_url(fighter.content.video)
+  json.official_preview cache_url(fighter.content.video)
 end
