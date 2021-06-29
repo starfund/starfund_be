@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_29_160441) do
+ActiveRecord::Schema.define(version: 2021_06_29_212804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -172,6 +172,20 @@ ActiveRecord::Schema.define(version: 2021_06_29_160441) do
     t.index ["error_group_id"], name: "index_exception_hunter_errors_on_error_group_id"
   end
 
+  create_table "fighter_reports", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
+    t.bigint "user_id", null: false
+    t.bigint "fighter_id", null: false
+    t.integer "page_visits"
+    t.integer "subscriptors"
+    t.integer "subscribers_per_visitors"
+    t.integer "monthly_income"
+    t.integer "cancelations"
+    t.index ["fighter_id"], name: "index_fighter_reports_on_fighter_id"
+    t.index ["user_id"], name: "index_fighter_reports_on_user_id"
+  end
+
   create_table "fighters", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -282,6 +296,8 @@ ActiveRecord::Schema.define(version: 2021_06_29_160441) do
   add_foreign_key "courses", "businesses"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "exception_hunter_errors", "exception_hunter_error_groups", column: "error_group_id"
+  add_foreign_key "fighter_reports", "fighters"
+  add_foreign_key "fighter_reports", "users"
   add_foreign_key "fighters", "contents"
   add_foreign_key "fighters", "price_tiers"
   add_foreign_key "petitions", "users"

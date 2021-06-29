@@ -25,6 +25,7 @@ class Fighter < ApplicationRecord
   belongs_to :price_tier
   belongs_to :content, optional: true # Official prview
   has_many :contents
+  has_many :fighter_reports
 
   has_many_attached :public_videos
   has_many_attached :private_videos
