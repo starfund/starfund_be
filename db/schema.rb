@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_225108) do
+ActiveRecord::Schema.define(version: 2021_06_29_160441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 2021_06_17_225108) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "businesses", force: :cascade do |t|
+    t.string "name"
+    t.string "country"
+    t.date "birthdate"
+    t.string "category"
+    t.bigint "price_tier_id", null: false
+    t.bigint "content_id"
+    t.string "slogan"
+    t.index ["content_id"], name: "index_businesses_on_content_id"
+    t.index ["price_tier_id"], name: "index_businesses_on_price_tier_id"
+  end
+
   create_table "charges", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "fighter_id"
@@ -88,6 +100,27 @@ ActiveRecord::Schema.define(version: 2021_06_17_225108) do
     t.integer "fake_likes_count", default: 0
     t.bigint "likes_count", default: 0
     t.index ["fighter_id"], name: "index_contents_on_fighter_id"
+  end
+
+  create_table "course_schedules", force: :cascade do |t|
+    t.integer "week_day"
+    t.time "start_hour"
+    t.time "end_hour"
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_course_schedules_on_course_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.string "level"
+    t.string "course_goal"
+    t.integer "course_type"
+    t.bigint "business_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_courses_on_business_id"
   end
 
   create_table "credit_cards", force: :cascade do |t|
@@ -232,16 +265,21 @@ ActiveRecord::Schema.define(version: 2021_06_17_225108) do
     t.string "card_id"
     t.string "customer_id"
     t.date "birthdate"
+    t.boolean "is_fighter", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "businesses", "contents"
+  add_foreign_key "businesses", "price_tiers"
   add_foreign_key "charges", "fighters"
   add_foreign_key "charges", "users"
   add_foreign_key "comments", "contents"
   add_foreign_key "comments", "users"
   add_foreign_key "contents", "fighters"
+  add_foreign_key "course_schedules", "courses"
+  add_foreign_key "courses", "businesses"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "exception_hunter_errors", "exception_hunter_error_groups", column: "error_group_id"
   add_foreign_key "fighters", "contents"

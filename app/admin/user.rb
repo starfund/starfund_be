@@ -1,5 +1,7 @@
 ActiveAdmin.register User do
-  permit_params :id, :email, :first_name, :last_name, :username, :password, :password_confirmation
+  permit_params :id, :email, :first_name, :last_name,
+                :username, :password, :password_confirmation,
+                :is_fighter
 
   form do |f|
     f.inputs 'Details' do
@@ -7,6 +9,7 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :username
+      f.input :is_fighter
 
       if f.object.new_record?
         f.input :password
@@ -20,6 +23,7 @@ ActiveAdmin.register User do
   index do
     selectable_column
     id_column
+    column :is_fighter
     column :email
     column :first_name
     column :last_name
@@ -32,6 +36,7 @@ ActiveAdmin.register User do
   end
 
   filter :id
+  filter :is_fighter, as: :select, label: "Fighter"
   filter :email
   filter :username
   filter :first_name
@@ -42,6 +47,7 @@ ActiveAdmin.register User do
   show do
     attributes_table do
       row :id
+      row :is_fighter
       row :email
       row :first_name
       row :last_name
