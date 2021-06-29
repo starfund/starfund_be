@@ -16,7 +16,7 @@ module Api
 
       def resource_data_params
         JSON.parse(resource_data.to_json(
-          only: ["id", "first_name", "last_name", "email", "name", "username", "birthdate"]
+          only: ["id", "first_name", "last_name", "email", "name", "username", "birthdate", "is_fighter"]
         ))
       end
     end
