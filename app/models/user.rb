@@ -46,6 +46,7 @@ class User < ApplicationRecord
   has_many :subscriptions
   has_many :comments
   has_many :charges
+  has_many :fighter_reports
 
   before_validation :init_uid
 
@@ -74,6 +75,12 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.assign_attributes user_params.except('id')
     end
+  end
+
+  def last_report
+    return unless is_fighter?
+
+    fighter_reports.order(year: :desc, month: :desc)&.first
   end
 
   private
