@@ -66,7 +66,7 @@ module Api
       end
 
       def ppv_price
-        1000
+        500
       end
     end
   end
