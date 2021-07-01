@@ -80,7 +80,7 @@ class User < ApplicationRecord
   def last_report
     return unless is_fighter?
 
-    fighter_reports.order(year: :desc, month: :desc)&.first
+    fighter_reports.order(year: :desc, month: :desc, week: :desc)&.first
   end
 
   private

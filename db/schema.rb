@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_29_212804) do
+ActiveRecord::Schema.define(version: 2021_07_01_213732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 2021_06_29_212804) do
     t.integer "subscribers_per_visitors"
     t.integer "monthly_income"
     t.integer "cancelations"
+    t.integer "week"
     t.index ["fighter_id"], name: "index_fighter_reports_on_fighter_id"
     t.index ["user_id"], name: "index_fighter_reports_on_user_id"
   end

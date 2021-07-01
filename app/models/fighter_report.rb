@@ -12,6 +12,7 @@
 #  subscribers_per_visitors :integer
 #  monthly_income           :integer
 #  cancelations             :integer
+#  week                     :integer
 #
 # Indexes
 #
