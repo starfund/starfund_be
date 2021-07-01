@@ -24,6 +24,7 @@
 #  card_id                :string
 #  customer_id            :string
 #  birthdate              :date
+#  is_fighter             :boolean          default(FALSE), not null
 #
 # Indexes
 #

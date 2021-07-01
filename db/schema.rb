@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_063844) do
+ActiveRecord::Schema.define(version: 2021_07_01_223445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -52,6 +52,22 @@ ActiveRecord::Schema.define(version: 2021_06_26_063844) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "business_contents", force: :cascade do |t|
+    t.bigint "business_id", null: false
+    t.string "title"
+    t.string "description"
+    t.date "event_date"
+    t.boolean "public"
+    t.boolean "published"
+    t.string "title_ru"
+    t.string "description_ru"
+    t.string "title_es"
+    t.string "description_es"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_business_contents_on_business_id"
   end
 
   create_table "businesses", force: :cascade do |t|
@@ -172,6 +188,21 @@ ActiveRecord::Schema.define(version: 2021_06_26_063844) do
     t.index ["error_group_id"], name: "index_exception_hunter_errors_on_error_group_id"
   end
 
+  create_table "fighter_reports", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
+    t.bigint "user_id", null: false
+    t.bigint "fighter_id", null: false
+    t.integer "page_visits"
+    t.integer "subscriptors"
+    t.integer "subscribers_per_visitors"
+    t.integer "monthly_income"
+    t.integer "cancelations"
+    t.integer "week"
+    t.index ["fighter_id"], name: "index_fighter_reports_on_fighter_id"
+    t.index ["user_id"], name: "index_fighter_reports_on_user_id"
+  end
+
   create_table "fighters", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -265,11 +296,13 @@ ActiveRecord::Schema.define(version: 2021_06_26_063844) do
     t.string "card_id"
     t.string "customer_id"
     t.date "birthdate"
+    t.boolean "is_fighter", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "business_contents", "businesses"
   add_foreign_key "businesses", "contents"
   add_foreign_key "businesses", "price_tiers"
   add_foreign_key "charges", "fighters"
@@ -281,6 +314,8 @@ ActiveRecord::Schema.define(version: 2021_06_26_063844) do
   add_foreign_key "courses", "businesses"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "exception_hunter_errors", "exception_hunter_error_groups", column: "error_group_id"
+  add_foreign_key "fighter_reports", "fighters"
+  add_foreign_key "fighter_reports", "users"
   add_foreign_key "fighters", "contents"
   add_foreign_key "fighters", "price_tiers"
   add_foreign_key "petitions", "users"

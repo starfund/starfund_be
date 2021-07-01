@@ -21,6 +21,7 @@ class Business < ApplicationRecord
   belongs_to :content, optional: true # Official preview
 
   has_many :courses
+  has_many :business_contents
 
   has_one_attached :cover_photo
   has_one_attached :profile_pic
