@@ -63,7 +63,7 @@ ActiveAdmin.register Fighter do
     input :support, label: 'Likes support word'
     f.input :cover_photo, as: :file
     f.input :profile_pic, as: :file
-    input :content, as: :select, collection: resource.contents
+    input :content, as: :select, collection: resource.contents, label: 'Presentation'
     f.actions
   end
 end
