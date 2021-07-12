@@ -1,6 +1,6 @@
 ActiveAdmin.register Fighter do
   permit_params :id, :email, :first_name, :last_name, :country, :reach, :height, :organization,
-                :birthdate, :cover_photo, :profile_pic, :preview_url, :price_tier_id,
+                :birthdate, :cover_photo, :profile_pic, :preview_url, :price_tier_id, :team_id,
                 :content_id, :support, public_videos: [], private_videos: []
 
   member_action :delete_content, method: :put do
@@ -11,6 +11,7 @@ ActiveAdmin.register Fighter do
 
   index do
     column :id
+    column :team
     column :first_name
     column :last_name
     column :country
@@ -27,6 +28,7 @@ ActiveAdmin.register Fighter do
 
   show do
     attributes_table do
+      row :team
       row :first_name
       row :last_name
       row :country
@@ -51,6 +53,7 @@ ActiveAdmin.register Fighter do
   end
 
   form multipart: true, direct_upload: true do |f|
+    input :team, as: :select, collection: Team.all
     input :first_name
     input :last_name
     input :country

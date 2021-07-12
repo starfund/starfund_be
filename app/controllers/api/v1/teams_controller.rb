@@ -6,7 +6,7 @@ module Api
       def index
         @with_content = params[:with_content].to_s.downcase == "true"
         if @with_content
-          @teams = Team.includes(:fighters)includes(:contents).all
+          @teams = Team.includes(:fighters).all
         else
           @teams = Team.all
         end

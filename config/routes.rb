@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :comments
       resources :credit_cards
       resources :fighters
+      resources :teams
       resources :fighter_reports
       resources :subscriptions do
         collection do
