@@ -23,7 +23,7 @@ json.subscriptions do
       json.team do
         json.partial! 'api/v1/teams/info', team: subscription.team, content: true
       end
-
+      json.fighter_picture cache_url(subscription.team.profile_pic)
       json.content do
         json.array! subscription.team.fighters.map(&:contents).flatten.filter{|c| c.public == false } do |content|
           json.extract! content, :title, :description, :event_date, :feed, :title_ru, :title_es, :description_ru, :description_es

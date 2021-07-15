@@ -3,7 +3,7 @@ module Api
     class ContentsController < Api::V1::ApiController
       def index
         @public_content = Fighter.includes(:contents).map(&:public_content).flatten
-        @private_content = current_user.subscriptions.map(&:fighter).uniq.map(&:private_content).flatten
+        @private_content = current_user.subscriptions.map(&:private_content).flatten
         @user_likes = UserLike.where(user: current_user)
       end
 

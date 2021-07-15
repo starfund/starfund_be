@@ -51,7 +51,9 @@ class Subscription < ApplicationRecord
   end
 
   def private_content
-    fighter.private_content
+    fighter_content = fighter&.private_content || []
+    team_content = team&.fighters&.map(&:private_content) || []
+    fighter_content + team_content
   end
 
 end
