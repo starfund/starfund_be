@@ -4,24 +4,27 @@
 #
 #  id               :bigint           not null, primary key
 #  user_id          :bigint           not null
-#  fighter_id       :bigint           not null
+#  fighter_id       :bigint
 #  last_charge      :integer
 #  last_charge_date :datetime
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  status           :integer
 #  stripe_sub       :string
+#  team_id          :bigint
 #
 # Indexes
 #
 #  index_subscriptions_on_fighter_id  (fighter_id)
+#  index_subscriptions_on_team_id     (team_id)
 #  index_subscriptions_on_user_id     (user_id)
 #
 class Subscription < ApplicationRecord
   include AASM
 
   belongs_to :user
-  belongs_to :fighter
+  belongs_to :fighter, optional: true
+  belongs_to :team, optional: true
 
   enum status: { active: 0, inactive: 1, canceled: 2 }
 

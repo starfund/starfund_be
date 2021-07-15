@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_12_052342) do
+ActiveRecord::Schema.define(version: 2021_07_14_210948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -258,14 +258,16 @@ ActiveRecord::Schema.define(version: 2021_07_12_052342) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "fighter_id", null: false
+    t.bigint "fighter_id"
     t.integer "last_charge"
     t.datetime "last_charge_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status"
     t.string "stripe_sub"
+    t.bigint "team_id"
     t.index ["fighter_id"], name: "index_subscriptions_on_fighter_id"
+    t.index ["team_id"], name: "index_subscriptions_on_team_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
@@ -333,6 +335,7 @@ ActiveRecord::Schema.define(version: 2021_07_12_052342) do
   add_foreign_key "fighters", "teams"
   add_foreign_key "petitions", "users"
   add_foreign_key "subscriptions", "fighters"
+  add_foreign_key "subscriptions", "teams"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "teams", "price_tiers"
   add_foreign_key "user_likes", "contents"
