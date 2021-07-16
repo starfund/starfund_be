@@ -1,6 +1,5 @@
 json.extract! team, :id, :name, :country, :preview_url
 json.sub_price team.price_by_geo(geo)
-json.official_preview team.preview_url
 json.partial! 'api/v1/teams/attachments', team: team
 
 if content && team.fighters.length > 0
