@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_01_223445) do
+ActiveRecord::Schema.define(version: 2021_07_14_210948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -216,8 +216,10 @@ ActiveRecord::Schema.define(version: 2021_07_01_223445) do
     t.bigint "price_tier_id", default: 1, null: false
     t.bigint "content_id"
     t.boolean "support", default: false
+    t.bigint "team_id"
     t.index ["content_id"], name: "index_fighters_on_content_id"
     t.index ["price_tier_id"], name: "index_fighters_on_price_tier_id"
+    t.index ["team_id"], name: "index_fighters_on_team_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -256,15 +258,27 @@ ActiveRecord::Schema.define(version: 2021_07_01_223445) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "fighter_id", null: false
+    t.bigint "fighter_id"
     t.integer "last_charge"
     t.datetime "last_charge_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status"
     t.string "stripe_sub"
+    t.bigint "team_id"
     t.index ["fighter_id"], name: "index_subscriptions_on_fighter_id"
+    t.index ["team_id"], name: "index_subscriptions_on_team_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.string "country"
+    t.string "preview_url"
+    t.bigint "price_tier_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["price_tier_id"], name: "index_teams_on_price_tier_id"
   end
 
   create_table "user_likes", force: :cascade do |t|
@@ -318,9 +332,12 @@ ActiveRecord::Schema.define(version: 2021_07_01_223445) do
   add_foreign_key "fighter_reports", "users"
   add_foreign_key "fighters", "contents"
   add_foreign_key "fighters", "price_tiers"
+  add_foreign_key "fighters", "teams"
   add_foreign_key "petitions", "users"
   add_foreign_key "subscriptions", "fighters"
+  add_foreign_key "subscriptions", "teams"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "teams", "price_tiers"
   add_foreign_key "user_likes", "contents"
   add_foreign_key "user_likes", "users"
 end

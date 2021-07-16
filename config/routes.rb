@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       resources :credit_cards
       resources :fighters
       resources :businesses
+      resources :teams
+      resources :fighter_reports
       resources :subscriptions do
         collection do
           post :ppv

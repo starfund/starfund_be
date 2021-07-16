@@ -1,5 +1,8 @@
 json.id content.id
 json.title content.title
+if content.fighter.team
+  json.team_name content.fighter.team.name
+end
 json.fighter_id content.fighter.id
 json.first_name content.fighter.first_name
 json.last_name content.fighter.last_name
