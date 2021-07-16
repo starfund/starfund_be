@@ -9,13 +9,16 @@
 #  price_tier_id :bigint           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  content_id    :bigint
 #
 # Indexes
 #
+#  index_teams_on_content_id     (content_id)
 #  index_teams_on_price_tier_id  (price_tier_id)
 #
 class Team < ApplicationRecord
   belongs_to :price_tier
+  belongs_to :content, optional: true # Official prview
   has_many :fighters
 
   has_one_attached :cover_photo
