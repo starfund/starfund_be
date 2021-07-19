@@ -89,10 +89,10 @@ ActiveAdmin.register Content do
     input :event_date, start_year: 1990
     input :public
     input :feed
-    if resource.image.attached?
+    unless resource.video.attached?
       f.input :image, as: :file, input_html: { direct_upload: true }
     end
-    if resource.video.attached?
+    unless resource.image.attached?
       f.input :video, as: :file, input_html: { direct_upload: true }
       f.input :video_thumbnail, as: :file, input_html: { direct_upload: true }
     end
