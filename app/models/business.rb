@@ -10,6 +10,7 @@
 #  price_tier_id :bigint           not null
 #  content_id    :bigint
 #  slogan        :string
+#  facebook_link :string
 #
 # Indexes
 #
