@@ -12,6 +12,7 @@ ActiveAdmin.register Business do
       row :birthdate
       row :category
       row :price_tier
+      row :facebook_link
       row :slogan
       
       row "Profile Picture" do |p|
