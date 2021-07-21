@@ -43,7 +43,7 @@ class User < ApplicationRecord
   validates :uid, uniqueness: { scope: :provider }
 
   has_many :credit_cards
-  has_many :subscriptions
+  has_many :subscriptions, -> { includes([:fighter])}
   has_many :comments
   has_many :charges
   has_many :fighter_reports

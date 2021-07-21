@@ -8,7 +8,7 @@ module Api
       def index
         @geo = geo
         @subscriptions = user&.active_subscriptions || []
-        @public_content = Fighter.includes(:contents).map(&:public_content).flatten
+        @public_content = Fighter.with_basic_attachments.with_content.map(&:public_content).flatten
       end
 
       def create
