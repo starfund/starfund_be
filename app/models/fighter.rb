@@ -38,7 +38,9 @@ class Fighter < ApplicationRecord
   default_scope { includes([:team]).includes([:price_tier]) }
   scope :with_basic_attachments, -> { includes([:cover_photo_attachment])
                                       .includes([:profile_pic_attachment]) }
-  scope :with_content, -> { includes([:content]) }
+  scope :with_content, -> { includes([:content])
+                            .includes([:contents])
+                          }
 
 
   def name
