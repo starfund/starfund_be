@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_163150) do
+ActiveRecord::Schema.define(version: 2021_07_21_064729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -270,6 +270,15 @@ ActiveRecord::Schema.define(version: 2021_07_20_163150) do
     t.index ["fighter_id"], name: "index_subscriptions_on_fighter_id"
     t.index ["team_id"], name: "index_subscriptions_on_team_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "taggable_type"
+    t.bigint "taggable_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id"
   end
 
   create_table "teams", force: :cascade do |t|

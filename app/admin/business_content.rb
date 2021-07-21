@@ -2,7 +2,7 @@ ActiveAdmin.register BusinessContent do
   permit_params :id, :title, :event_date, :description,
                 :business_id, :image, :video, :public, :published,
                 :title_ru, :title_es, :description_ru,
-                :description_es, :video_thumbnail
+                :description_es, :video_thumbnail, tags_attributes: [:id, :name, :_destroy]
 
   member_action :delete_content, method: :put do
     @pic = ActiveStorage::Attachment.find(params[:pic_id])
@@ -81,6 +81,10 @@ ActiveAdmin.register BusinessContent do
     input :business
     input :event_date, start_year: 1990
     input :public
+    f.has_many :tags, allow_destroy: true do |tag|
+      tag.input :id, as: :hidden
+      tag.input :name
+    end
     unless resource.video.attached?
       f.input :image, as: :file, input_html: { direct_upload: true }
     end
