@@ -6,11 +6,7 @@ module Api
 
       def index
         @with_content = params[:with_content].to_s.downcase == "true"
-        if @with_content
-          @fighters = Fighter.includes(:contents).all
-        else
-          @fighters = Fighter.all
-        end
+        @fighters = Fighter.with_content.all
       end
     end
   end

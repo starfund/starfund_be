@@ -26,6 +26,9 @@ class Subscription < ApplicationRecord
   belongs_to :fighter, optional: true
   belongs_to :team, optional: true
 
+  default_scope { includes([:team]).includes([:fighter]) }
+  scope :with_user, -> { includes([:user]) }
+
   enum status: { active: 0, inactive: 1, canceled: 2 }
 
   aasm column: :status do

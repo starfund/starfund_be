@@ -35,6 +35,14 @@ class Fighter < ApplicationRecord
   has_one_attached :cover_photo
   has_one_attached :profile_pic
 
+  default_scope { includes([:team]).includes([:price_tier]) }
+  scope :with_basic_attachments, -> { includes([:cover_photo_attachment])
+                                      .includes([:profile_pic_attachment]) }
+  scope :with_content, -> { includes([:content])
+                            .includes([:contents])
+                          }
+
+
   def name
     "#{first_name} #{last_name}"
   end

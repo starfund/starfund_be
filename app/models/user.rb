@@ -43,7 +43,7 @@ class User < ApplicationRecord
   validates :uid, uniqueness: { scope: :provider }
 
   has_many :credit_cards
-  has_many :subscriptions
+  has_many :subscriptions, -> { includes([:fighter])}
   has_many :comments
   has_many :charges
   has_many :fighter_reports
@@ -67,7 +67,7 @@ class User < ApplicationRecord
   def has_sub(fighter)
     return false if subscriptions.empty?
 
-    subscriptions.map(&:fighter).include?(fighter)
+    subscriptions.with_user.map(&:fighter).include?(fighter)
   end
 
   def self.from_social_provider(provider, user_params)

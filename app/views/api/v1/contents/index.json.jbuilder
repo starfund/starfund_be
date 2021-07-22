@@ -1,13 +1,15 @@
-json.content do
-  json.array! @public_content do |content|
-    json.exclusive false
-    json.partial! 'api/v1/contents/show', content: content
-    json.partial! 'api/v1/fighters/attachments', fighter: content.fighter
-  end
-  json.array! @private_content do |content|
-    json.exclusive true
-    json.partial! 'api/v1/contents/show', content: content
-    json.partial! 'api/v1/fighters/attachments', fighter: content.fighter
+json.cache! ['v1', 'content_index'], expires_in: 10.minutes do
+  json.content do
+    json.array! @public_content do |content|
+      json.exclusive false
+      json.partial! 'api/v1/contents/show', content: content
+      json.partial! 'api/v1/fighters/attachments', fighter: content.fighter
+    end
+    json.array! @private_content do |content|
+      json.exclusive true
+      json.partial! 'api/v1/contents/show', content: content
+      json.partial! 'api/v1/fighters/attachments', fighter: content.fighter
+    end
   end
 end
 json.likes do

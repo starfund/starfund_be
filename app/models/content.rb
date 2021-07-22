@@ -32,6 +32,11 @@ class Content < ApplicationRecord
   has_one_attached :video
   has_one_attached :video_thumbnail
 
+  default_scope { includes([:video_thumbnail_attachment])
+                  .includes([:video_attachment])
+                  .includes([:image_attachment]) 
+                }
+
   def total_likes
     likes_count + fake_likes_count
   end

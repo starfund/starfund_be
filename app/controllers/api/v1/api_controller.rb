@@ -1,8 +1,10 @@
 module Api
   module V1
     class ApiController < ActionController::API
+
       helper_method :geo, :cache_url
       # include Pundit
+      include ActionController::Caching
       include DeviseTokenAuth::Concerns::SetUserByToken
 
       # after_action :verify_authorized, except: :index
