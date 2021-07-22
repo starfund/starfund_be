@@ -12,6 +12,7 @@ json.content do
     json.business_id content.business.id
     json.name content.business.name
     json.description content.description
+    json.public content.public
     json.title_ru content.title_ru
     json.description_ru content.description_ru
     json.title_es content.title_es

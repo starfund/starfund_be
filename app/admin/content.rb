@@ -5,7 +5,7 @@ ActiveAdmin.register Content do
                 :description_es, :fake_likes_count, :video_thumbnail
 
   member_action :delete_content, method: :put do
-    @pic = ActiveStorage::Attachment.find(params[:pic_id])
+    @pic = ActiveStorage::Attachment.find_by(record_type: 'Content', record_id: params[:pic_id].to_i)
     @pic.purge_later
     redirect_backwards_or_to_root
   end
