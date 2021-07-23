@@ -9,6 +9,7 @@ module Api
         @geo = geo
         @subscriptions = user&.active_subscriptions || []
         @public_content = Fighter.with_basic_attachments.with_content.map(&:public_content).flatten
+        @business_subs = user&.active_business_subscriptions || []
       end
 
       def create

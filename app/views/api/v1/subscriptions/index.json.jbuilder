@@ -47,3 +47,9 @@ json.public_content do
     json.video cache_url(content.video) if content.video.attached?
   end
 end
+
+json.business_subscription do
+  json.array! @business_subs do |subscription|
+    json.extract! subscription, :id, :last_charge, :last_charge_date, :status, :business_id
+  end
+end
