@@ -16,7 +16,7 @@ module Api
         create_provision_user unless user.present?
         return render_internal_error(StandardError.new "Already subscribed") if already_subscribed
 
-        @subscription = SubscriptionService.new(user, fighter, team, geo).process(card, price)
+        @subscription = SubscriptionService.new(user, fighter, team, business, geo).process(card, price)
       end
 
       def ppv
@@ -43,7 +43,8 @@ module Api
 
       def already_subscribed
         return user.has_sub(fighter) if params[:fighter]
-        return user.has_sub(team) if params[:team]
+        return user.has_team_sub(team) if params[:team]
+        return user.has_gym_sub(business) if params[:business]
       end
 
       def user
@@ -53,6 +54,7 @@ module Api
       def price
         return fighter.price_by_geo(geo) if params[:fighter]
         return team.price_by_geo(geo) if params[:team]
+        return business.price_by_geo(geo) if params[:business]
       end
 
       def name_array
@@ -65,6 +67,10 @@ module Api
 
       def team
         Team.find_by(id: params[:team])
+      end
+
+      def business
+        Business.find_by(id: [params[:business]])
       end
 
       def card

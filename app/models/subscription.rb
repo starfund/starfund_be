@@ -12,12 +12,14 @@
 #  status           :integer
 #  stripe_sub       :string
 #  team_id          :bigint
+#  business_id      :bigint
 #
 # Indexes
 #
-#  index_subscriptions_on_fighter_id  (fighter_id)
-#  index_subscriptions_on_team_id     (team_id)
-#  index_subscriptions_on_user_id     (user_id)
+#  index_subscriptions_on_business_id  (business_id)
+#  index_subscriptions_on_fighter_id   (fighter_id)
+#  index_subscriptions_on_team_id      (team_id)
+#  index_subscriptions_on_user_id      (user_id)
 #
 class Subscription < ApplicationRecord
   include AASM
@@ -25,8 +27,12 @@ class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :fighter, optional: true
   belongs_to :team, optional: true
+  belongs_to :business, optional: true
 
-  default_scope { includes([:team]).includes([:fighter]) }
+  default_scope { includes([:team])
+                  .includes([:fighter]) 
+                  .includes([:business])
+                }
   scope :with_user, -> { includes([:user]) }
 
   enum status: { active: 0, inactive: 1, canceled: 2 }

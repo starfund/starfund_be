@@ -70,6 +70,18 @@ class User < ApplicationRecord
     subscriptions.with_user.map(&:fighter).include?(fighter)
   end
 
+  def has_team_sub(team)
+    return false if subscriptions.empty?
+
+    subscriptions.with_user.map(&:team).include?(team)
+  end
+
+  def has_gym_sub(business)
+    return false if subscriptions.empty?
+
+    subscriptions.with_user.map(&:business).include?(business)
+  end
+
   def self.from_social_provider(provider, user_params)
     where(provider: provider, uid: user_params['id']).first_or_create! do |user|
       user.password = Devise.friendly_token[0, 20]
