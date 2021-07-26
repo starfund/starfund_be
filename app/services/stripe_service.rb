@@ -93,6 +93,8 @@ class StripeService
   end
 
   def create_customer(email, name)
+    return if customer.present?
+
     customer_params = {
       email: email,
       description: "Customer - #{name}"
