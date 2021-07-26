@@ -16,7 +16,7 @@ class SubscriptionService
       if(!user.card_id || (user&.card_id != token_id))
         stripe_service.add_card(token_id, user.email, user.full_name) 
       end
-      if (user.customer_id || already_subscribed?)
+      if already_subscribed?
         raise StandardError.new "Already subscribed"
       end
 
