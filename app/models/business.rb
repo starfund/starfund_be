@@ -11,6 +11,8 @@
 #  content_id    :bigint
 #  slogan        :string
 #  facebook_link :string
+#  slogan_es     :string
+#  slogan_ru     :string
 #
 # Indexes
 #

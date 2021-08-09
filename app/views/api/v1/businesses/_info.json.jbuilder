@@ -1,4 +1,4 @@
-json.extract! business, :id, :name, :country, :birthdate, :slogan, :facebook_link
+json.extract! business, :id, :name, :country, :birthdate, :slogan, :slogan_es, :slogan_ru, :facebook_link
 
 json.sub_price business.price_by_geo(geo)
 

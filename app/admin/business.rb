@@ -2,7 +2,7 @@ ActiveAdmin.register Business do
   permit_params :id, :name, :country, :birthdate,
                 :category, :price_tier_id, :content_id,
                 :cover_photo, :profile_pic, :official_preview,
-                :slogan, :facebook_link
+                :slogan, :slogan_es, :slogan_ru, :facebook_link
 
 
   show do
@@ -32,6 +32,8 @@ ActiveAdmin.register Business do
   form multipart: true, direct_upload: true do |f|
     input :name
     input :slogan
+    input :slogan_es
+    input :slogan_ru
     input :country
     input :price_tier, include_blank: false
     input :birthdate, start_year: 1970

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_09_142714) do
+ActiveRecord::Schema.define(version: 2021_08_09_151412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 2021_08_09_142714) do
     t.bigint "content_id"
     t.string "slogan"
     t.string "facebook_link"
+    t.string "slogan_es"
+    t.string "slogan_ru"
     t.index ["content_id"], name: "index_businesses_on_content_id"
     t.index ["price_tier_id"], name: "index_businesses_on_price_tier_id"
   end
