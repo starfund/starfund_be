@@ -50,6 +50,8 @@ class User < ApplicationRecord
 
   before_validation :init_uid
 
+  after_create :mailchimp_add
+
   def full_name
     return username if first_name.blank?
 
@@ -103,5 +105,9 @@ class User < ApplicationRecord
 
   def init_uid
     self.uid = email if uid.blank? && provider == 'email'
+  end
+
+  def mailchimp_add
+    MailchimpService.new(self).add_user
   end
 end
