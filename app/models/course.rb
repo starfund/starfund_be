@@ -2,14 +2,18 @@
 #
 # Table name: courses
 #
-#  id          :bigint           not null, primary key
-#  name        :string
-#  level       :string
-#  course_goal :string
-#  course_type :integer
-#  business_id :bigint           not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id             :bigint           not null, primary key
+#  name           :string
+#  level          :string
+#  course_goal    :string
+#  course_type    :integer
+#  business_id    :bigint           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  name_ru        :string
+#  name_es        :string
+#  course_goal_ru :string
+#  course_goal_es :string
 #
 # Indexes
 #

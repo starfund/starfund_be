@@ -1,6 +1,8 @@
 ActiveAdmin.register Course do
   permit_params :id, :name, :course_type, :business_id,
-                :course_goal, :level, :cover_photo
+                :course_goal, :level, :cover_photo,
+                :name_es, :name_ru, :course_goal_es,
+                :course_goal_ru
 
   show do
     attributes_table do
@@ -18,9 +20,13 @@ ActiveAdmin.register Course do
 
   form multipart: true, direct_upload: true do |f|
     input :name
+    input :name_es
+    input :name_ru
     input :course_type
     input :business, as: :select
     input :course_goal
+    input :course_goal_es
+    input :course_goal_ru
     input :level
     f.input :cover_photo, as: :file
     

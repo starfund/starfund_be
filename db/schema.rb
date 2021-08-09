@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_23_035441) do
+ActiveRecord::Schema.define(version: 2021_08_09_142714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -137,6 +137,10 @@ ActiveRecord::Schema.define(version: 2021_07_23_035441) do
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_ru"
+    t.string "name_es"
+    t.string "course_goal_ru"
+    t.string "course_goal_es"
     t.index ["business_id"], name: "index_courses_on_business_id"
   end
 
