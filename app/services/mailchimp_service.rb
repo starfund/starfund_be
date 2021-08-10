@@ -35,10 +35,10 @@ class MailchimpService
     end
     response_body = JSON.parse(response.body)
     if response.status == 200
-      p "#{user.email} has been added to the mailing list"
+      Rails.logger.info "#{user.email} has been added to the mailing list"
     else
-      p  "Mailchimp error: #{response.status}"
-      p "#{response_body['detail']}"
+      Rails.logger.error  "Mailchimp error: #{response.status}"
+      Rails.logger.error "#{response_body['detail']}"
     end
   end
 end
