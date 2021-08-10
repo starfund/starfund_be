@@ -25,6 +25,7 @@
 #  customer_id            :string
 #  birthdate              :date
 #  is_fighter             :boolean          default(FALSE), not null
+#  mailchimp_sync         :boolean          default(FALSE)
 #
 # Indexes
 #
