@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_175636) do
+ActiveRecord::Schema.define(version: 2021_08_12_175108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 2021_08_10_175636) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "card_id"
     t.boolean "default", default: false
+    t.integer "last4"
     t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 

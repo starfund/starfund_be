@@ -8,6 +8,7 @@
 #  updated_at :datetime         not null
 #  card_id    :string
 #  default    :boolean          default(FALSE)
+#  last4      :integer
 #
 # Indexes
 #
