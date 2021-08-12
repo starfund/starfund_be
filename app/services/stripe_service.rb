@@ -11,12 +11,18 @@ class StripeService
     @geo = geo
   end
 
-  def add_card(token_id, email, name)
+  def add_card(token_id, email, name, card_data)
     create_customer(email, name) unless customer.present?
     card = customer.sources.create(source: token_id)
     ActiveRecord::Base.transaction do
       user.default_card.update(default: false) if user.card_id
-      user.credit_cards << CreditCard.create(user: user, card_id: card.id, default: true)
+      user.credit_cards << CreditCard.create(
+                            user: user,
+                            card_id: card.id,
+                            default: true,
+                            brand: card_data[:brand],
+                            last4: card_data[:last4]
+                          )
       user.update!(card_id: card.id)
     end
   end

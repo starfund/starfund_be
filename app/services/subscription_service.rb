@@ -10,11 +10,11 @@ class SubscriptionService
     @stripe_service = StripeService.new(user, geo);
   end
 
-  def process(token_id, price)
+  def process(token_id, price, card_data)
     stripe_sub = ''
     ActiveRecord::Base.transaction do
       if(!user.card_id || (user&.card_id != token_id))
-        stripe_service.add_card(token_id, user.email, user.full_name) 
+        stripe_service.add_card(token_id, user.email, user.full_name, card_data) 
       end
       if already_subscribed?
         raise StandardError.new "Already subscribed"

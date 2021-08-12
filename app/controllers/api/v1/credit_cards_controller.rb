@@ -11,7 +11,7 @@ module Api
 
       def create
         service = StripeService.new(user, geo)
-        service.add_card(token_id, email, customer_name) if token_id
+        service.add_card(token_id, email, customer_name, card_data) if token_id
         @card = service.credit_card_info
       end
 
@@ -32,6 +32,10 @@ module Api
 
       def token_json
         params[:token]
+      end
+
+      def card_data
+        token_json['card']
       end
 
       def token_id
