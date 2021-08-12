@@ -9,6 +9,7 @@
 #  card_id    :string
 #  default    :boolean          default(FALSE)
 #  last4      :integer
+#  brand      :string
 #
 # Indexes
 #
