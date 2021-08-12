@@ -51,7 +51,7 @@ class User < ApplicationRecord
 
   before_validation :init_uid
 
-  after_create :mailchimp_add, if: ENV['MAILCHIMP_ENABLED']
+  after_create :mailchimp_add, if: :mailchimp_enabled
 
   def full_name
     return username if first_name.blank?
@@ -110,5 +110,9 @@ class User < ApplicationRecord
 
   def mailchimp_add    
     MailchimpService.new(self).add_user
+  end
+
+  def mailchimp_enabled
+    ENV['MAILCHIMP_ENABLED']
   end
 end
