@@ -23,9 +23,11 @@ module Api
       end
 
       def resource_billing_params
-        JSON.parse(User.find(resource_data['id'])&.default_card.to_json(
+        billing = JSON.parse(User.find(resource_data['id'])&.default_card.to_json(
           only: ["id", "card_id", "default", "last4", "brand"]
         ))
+
+        billing || {}
       end
     end
   end
