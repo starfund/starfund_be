@@ -38,7 +38,11 @@ module Webhooks
     end
 
     def handle_customer_subscription_updated(event)
-      #StripeSubscriptionUpdateService.new(event.data.object).update_subscription
+      stripe_sub = event.data.object
+
+      if stripe_sub.present?
+        StripeSubscriptionUpdateService.new(subscription, stripe_sub).update_subscription
+      end
     end
 
     def handle_customer_subscription_deleted(event)

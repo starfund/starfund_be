@@ -24,8 +24,10 @@ class StripeSubscriptionUpdateService
   end
 
   def cancel_sub
+    subscription.cancel!
   end
 
   def lapse_sub
+    # subscription.invalidate!
   end
 end
