@@ -38,15 +38,16 @@ module Webhooks
     end
 
     def handle_customer_subscription_updated(event)
-      stripe_sub = event.data.object
-
-      if stripe_sub.present?
-        StripeSubscriptionUpdateService.new(subscription, stripe_sub).update_subscription
-      end
+      # TODO: SEE IF IMPLEMENT
     end
 
     def handle_customer_subscription_deleted(event)
-      #StripeSubscriptionUpdateService.new(event.data.object).update_subscription
+      stripe_sub = event.data.object
+
+      if stripe_sub.present?
+        fighter_sub = Subscription.find_by(stripe_sub: stripe_sub.id)
+        StripeSubscriptionUpdateService.new(stripe_sub, fighter_sub).cancel_sub
+      end
     end
 
     def handle_invoice_payment_succeeded(event)
@@ -71,7 +72,8 @@ module Webhooks
 
     def init_redis
       ConnectionPool::Wrapper.new(size: 10, timeout: 3) do
-        options = { url: ENV['REDIS_URL'].to_s || "redis://localhost:6379" }
+        redis_uri = ENV['REDIS_URL'] ? ENV['REDIS_URL'].to_s : "redis://localhost:6379" 
+        options = { url: redis_uri }
         options[:logger] = Logger.new(Rails.root.join('log', 'redis.log')) if Rails.env.development?
         Redis.new(options)
       end
