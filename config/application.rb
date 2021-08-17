@@ -36,5 +36,8 @@ module App
     config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
+
+    # Active Storage
+    config.active_storage.content_types_to_serve_as_binary -= ['image/svg+xml']
   end
 end
