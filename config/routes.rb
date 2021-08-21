@@ -21,7 +21,11 @@ Rails.application.routes.draw do
         get :must_update, on: :collection
       end
       resources :comments
-      resources :credit_cards
+      resources :credit_cards do
+        collection do
+          delete :destroy
+        end
+      end
       resources :fighters
       resources :businesses
       resources :teams

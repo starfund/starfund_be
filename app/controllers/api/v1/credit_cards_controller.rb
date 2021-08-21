@@ -24,6 +24,13 @@ module Api
         head :no_content
       end
 
+      def destroy
+        user.default_card.update(default: false)
+        user.save
+
+        head :no_content
+      end
+
       private
 
       def user
