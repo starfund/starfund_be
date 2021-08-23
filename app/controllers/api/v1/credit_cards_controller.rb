@@ -4,9 +4,7 @@ module Api
       helper_method :user
 
       def index
-        service = StripeService.new(user, geo)
-        @card = service.credit_card_info
-        @customer = service.customer
+        @card = user.default_card
       end
 
       def create
