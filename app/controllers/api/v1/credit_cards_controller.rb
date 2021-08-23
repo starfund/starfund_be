@@ -42,7 +42,7 @@ module Api
       end
 
       def card_data
-        token_json['card']
+        params[:card]
       end
 
       def token_id
@@ -50,7 +50,7 @@ module Api
       end
 
       def email
-        token_json['email'] || "example#{user.id}@example.com"
+        token_json['email'] || user.email || "example#{user.id}@example.com"
       end
 
       def customer_name

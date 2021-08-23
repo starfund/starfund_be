@@ -15,7 +15,7 @@ class StripeService
     create_customer(email, name) unless customer.present?
     card = customer.sources.create(source: token_id)
     ActiveRecord::Base.transaction do
-      user.default_card.update(default: false) if user.card_id
+      user.default_card.update(default: false) if user.default_card
       user.credit_cards << CreditCard.create(
                             user: user,
                             card_id: card.id,
