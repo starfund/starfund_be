@@ -1,7 +1,7 @@
 ActiveAdmin.register Fighter do
   permit_params :id, :email, :first_name, :last_name, :country, :reach, :height, :organization,
                 :birthdate, :cover_photo, :profile_pic, :preview_url, :price_tier_id, :team_id,
-                :content_id, :support, public_videos: [], private_videos: []
+                :url_name, :content_id, :support, public_videos: [], private_videos: []
 
   member_action :delete_content, method: :put do
     @pic = ActiveStorage::Attachment.find(params[:pic_id])
@@ -29,6 +29,7 @@ ActiveAdmin.register Fighter do
   show do
     attributes_table do
       row :team
+      row :url_name
       row :first_name
       row :last_name
       row :country
@@ -54,6 +55,7 @@ ActiveAdmin.register Fighter do
 
   form multipart: true, direct_upload: true do |f|
     input :team, as: :select, collection: Team.all
+    input :url_name
     input :first_name
     input :last_name
     input :country

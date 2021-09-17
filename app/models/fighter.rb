@@ -16,6 +16,7 @@
 #  content_id    :bigint
 #  support       :boolean          default(FALSE)
 #  team_id       :bigint
+#  url_name      :string
 #
 # Indexes
 #
