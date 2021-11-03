@@ -1,13 +1,14 @@
 class SubscriptionService
   attr_reader :user, :fighter, :stripe_service, :geo, :team, :business
 
-  def initialize(user, fighter, team, business, geo)
+  def initialize(user, fighter, team, business, organization, geo)
     @user = user
     @fighter = fighter
     @team = team
     @business = business
+    @organization = organization
     @geo = geo
-    @stripe_service = StripeService.new(user, geo);
+    @stripe_service = StripeService.new(user, geo, organization&.name);
   end
 
   def process(token_id, price, card_data)
@@ -42,6 +43,13 @@ class SubscriptionService
                                               last_charge_date: DateTime.now,
                                               stripe_sub: stripe_sub.id)
       end
+      if organization 
+        return Subscription.find_or_create_by(user: user,
+                                              organization: organization,
+                                              last_charge: price,
+                                              last_charge_date: DateTime.now,
+                                              stripe_sub: stripe_sub.id)
+      end
     end
   end
 
@@ -54,6 +62,9 @@ class SubscriptionService
     end
     if business
       return Subscription.exists?(user: user, business: business)
+    end
+    if organization
+      return Subscription.exists?(user: user, organization: organization)
     end
   end
 end
