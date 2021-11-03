@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_132531) do
+ActiveRecord::Schema.define(version: 2021_11_03_020234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -232,6 +232,11 @@ ActiveRecord::Schema.define(version: 2021_09_17_132531) do
     t.index ["team_id"], name: "index_fighters_on_team_id"
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.integer "monthly_price"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.integer "amount"
     t.string "concept"
@@ -277,8 +282,10 @@ ActiveRecord::Schema.define(version: 2021_09_17_132531) do
     t.string "stripe_sub"
     t.bigint "team_id"
     t.bigint "business_id"
+    t.bigint "organization_id"
     t.index ["business_id"], name: "index_subscriptions_on_business_id"
     t.index ["fighter_id"], name: "index_subscriptions_on_fighter_id"
+    t.index ["organization_id"], name: "index_subscriptions_on_organization_id"
     t.index ["team_id"], name: "index_subscriptions_on_team_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
@@ -360,6 +367,7 @@ ActiveRecord::Schema.define(version: 2021_09_17_132531) do
   add_foreign_key "petitions", "users"
   add_foreign_key "subscriptions", "businesses"
   add_foreign_key "subscriptions", "fighters"
+  add_foreign_key "subscriptions", "organizations"
   add_foreign_key "subscriptions", "teams"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "teams", "contents"

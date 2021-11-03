@@ -13,13 +13,15 @@
 #  stripe_sub       :string
 #  team_id          :bigint
 #  business_id      :bigint
+#  organization_id  :bigint
 #
 # Indexes
 #
-#  index_subscriptions_on_business_id  (business_id)
-#  index_subscriptions_on_fighter_id   (fighter_id)
-#  index_subscriptions_on_team_id      (team_id)
-#  index_subscriptions_on_user_id      (user_id)
+#  index_subscriptions_on_business_id      (business_id)
+#  index_subscriptions_on_fighter_id       (fighter_id)
+#  index_subscriptions_on_organization_id  (organization_id)
+#  index_subscriptions_on_team_id          (team_id)
+#  index_subscriptions_on_user_id          (user_id)
 #
 class Subscription < ApplicationRecord
   include AASM
