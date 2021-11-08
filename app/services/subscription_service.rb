@@ -1,5 +1,5 @@
 class SubscriptionService
-  attr_reader :user, :fighter, :stripe_service, :geo, :team, :business
+  attr_reader :user, :fighter, :stripe_service, :geo, :team, :business, :organization
 
   def initialize(user, fighter, team, business, organization, geo)
     @user = user
@@ -21,6 +21,7 @@ class SubscriptionService
         raise StandardError.new "Already subscribed"
       end
 
+      byebug
       stripe_sub = stripe_service.subscribe(price)
       if fighter
         return Subscription.find_or_create_by(user: user,

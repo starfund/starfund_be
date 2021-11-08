@@ -30,6 +30,7 @@ class Subscription < ApplicationRecord
   belongs_to :fighter, optional: true
   belongs_to :team, optional: true
   belongs_to :business, optional: true
+  belongs_to :organization, optional: true
 
   default_scope { includes([:team])
                   .includes([:fighter]) 

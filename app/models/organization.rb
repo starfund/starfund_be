@@ -8,4 +8,7 @@
 #
 class Organization < ApplicationRecord
 
+ def price_by_geo(geo)
+    monthly_price
+  end 
 end

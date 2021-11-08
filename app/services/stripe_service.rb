@@ -9,7 +9,7 @@ class StripeService
   def initialize(user, geo, organization)
     @user = user
     @geo = geo
-    if organization == 'cagezilla'
+    if organization == 'Cagezilla'
       Stripe.api_key = ENV['STRIPE_CAGEZILLA_SECRET_KEY']
     else
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']

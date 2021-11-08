@@ -46,6 +46,7 @@ module Api
         return user.has_sub(fighter) if params[:fighter]
         return user.has_team_sub(team) if params[:team]
         return user.has_gym_sub(business) if params[:business]
+        return user.has_org(organization) if params[:organization]
       end
 
       def user
@@ -56,6 +57,7 @@ module Api
         return fighter.price_by_geo(geo) if params[:fighter]
         return team.price_by_geo(geo) if params[:team]
         return business.price_by_geo(geo) if params[:business]
+        return organization.price_by_geo(geo) if params[:organization]
       end
 
       def name_array
@@ -75,7 +77,8 @@ module Api
       end
 
       def organization
-        Organization.find_by(name: params[:organization])
+        org_name = params[:organization].downcase.capitalize
+        Organization.find_by(name: org_name)
       end
 
       def card
