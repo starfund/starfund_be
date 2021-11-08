@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_03_020234) do
+ActiveRecord::Schema.define(version: 2021_11_08_172622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -234,7 +234,9 @@ ActiveRecord::Schema.define(version: 2021_11_03_020234) do
 
   create_table "organizations", force: :cascade do |t|
     t.string "name"
-    t.integer "monthly_price"
+    t.integer "ppv_price"
+    t.bigint "price_tier_id", default: 1, null: false
+    t.index ["price_tier_id"], name: "index_organizations_on_price_tier_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -364,6 +366,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_020234) do
   add_foreign_key "fighters", "contents"
   add_foreign_key "fighters", "price_tiers"
   add_foreign_key "fighters", "teams"
+  add_foreign_key "organizations", "price_tiers"
   add_foreign_key "petitions", "users"
   add_foreign_key "subscriptions", "businesses"
   add_foreign_key "subscriptions", "fighters"
