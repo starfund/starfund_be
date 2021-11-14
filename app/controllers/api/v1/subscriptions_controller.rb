@@ -21,7 +21,11 @@ module Api
       end
 
       def ppv
+        @newbie = !current_user.present?
+        create_provision_user unless user.present?
+        return render_internal_error(StandardError.new "Already purchased") if already_purchased
 
+        @charge = ChargeService.new(user, organization, geo).ppv(card, price, card_data)
       end
 
       def old_ppv
@@ -53,6 +57,10 @@ module Api
         return user.has_org(organization) if params[:organization]
       end
 
+      def already_purchased
+        return Charge.where(user_id: user.id, organization: organization.id).any?
+      end
+
       def user
         @user ||= (current_user || User.find_by(email: params[:email]))
       end
@@ -61,7 +69,7 @@ module Api
         return fighter.price_by_geo(geo) if params[:fighter]
         return team.price_by_geo(geo) if params[:team]
         return business.price_by_geo(geo) if params[:business]
-        return organization.price_by_geo(geo) if params[:organization]
+        return params[:price] if params[:organization]
       end
 
       def name_array
