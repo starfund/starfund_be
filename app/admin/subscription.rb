@@ -4,6 +4,7 @@ ActiveAdmin.register Subscription do
   index do
     column :id
     column :user
+    column :organization
     column :business
     column :team
     column :fighter
@@ -19,6 +20,7 @@ ActiveAdmin.register Subscription do
     attributes_table do
       row :id
       row :user
+      row :organization
       row :business
       row :team
       row :fighter
