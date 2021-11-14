@@ -1,7 +1,7 @@
 ActiveAdmin.register OrgContent do
   permit_params :id, :title, :event_date, :description,
                 :org_event_id, :image, :video, :public, :published,
-                :title_ru, :title_es, :description_ru,
+                :title_ru, :title_es, :description_ru, :main_event,
                 :description_es, :video_thumbnail
 
   member_action :delete_content, method: :put do
@@ -15,6 +15,7 @@ ActiveAdmin.register OrgContent do
     column :title
     column :description
     column :org_event
+    column :main_event
     column :title_ru
     column :description_ru
     column :event_date
@@ -37,6 +38,7 @@ ActiveAdmin.register OrgContent do
     attributes_table do
       row :id
       row :org_event
+      row :main_event
       row :title
       row :title_ru
       row :event_date
@@ -79,6 +81,7 @@ ActiveAdmin.register OrgContent do
     input :title_es
     input :description_es
     input :org_event
+    input :main_event
     input :event_date, start_year: 2000
     input :public
     unless resource.video.attached?

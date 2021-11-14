@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: org_contents
+#
+#  id             :bigint           not null, primary key
+#  org_event_id   :bigint           not null
+#  title          :string
+#  title_ru       :string
+#  description    :string
+#  description_ru :string
+#  title_es       :string
+#  description_es :string
+#  public         :boolean
+#  event_date     :date
+#  published      :boolean
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  main_event     :boolean          default(FALSE)
+#
+# Indexes
+#
+#  index_org_contents_on_org_event_id  (org_event_id)
+#
 class OrgContent < ApplicationRecord
   belongs_to :org_event
 

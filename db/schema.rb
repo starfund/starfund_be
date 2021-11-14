@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_192322) do
+ActiveRecord::Schema.define(version: 2021_11_14_201218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -245,6 +245,7 @@ ActiveRecord::Schema.define(version: 2021_11_14_192322) do
     t.boolean "published"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "main_event", default: false
     t.index ["org_event_id"], name: "index_org_contents_on_org_event_id"
   end
 
