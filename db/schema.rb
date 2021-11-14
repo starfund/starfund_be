@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_08_180637) do
+ActiveRecord::Schema.define(version: 2021_11_14_192322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -232,6 +232,22 @@ ActiveRecord::Schema.define(version: 2021_11_08_180637) do
     t.index ["team_id"], name: "index_fighters_on_team_id"
   end
 
+  create_table "org_contents", force: :cascade do |t|
+    t.bigint "org_event_id", null: false
+    t.string "title"
+    t.string "title_ru"
+    t.string "description"
+    t.string "description_ru"
+    t.string "title_es"
+    t.string "description_es"
+    t.boolean "public"
+    t.date "event_date"
+    t.boolean "published"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["org_event_id"], name: "index_org_contents_on_org_event_id"
+  end
+
   create_table "org_events", force: :cascade do |t|
     t.string "name"
     t.bigint "organization_id", null: false
@@ -374,6 +390,7 @@ ActiveRecord::Schema.define(version: 2021_11_08_180637) do
   add_foreign_key "fighters", "contents"
   add_foreign_key "fighters", "price_tiers"
   add_foreign_key "fighters", "teams"
+  add_foreign_key "org_contents", "org_events"
   add_foreign_key "org_events", "organizations"
   add_foreign_key "organizations", "price_tiers"
   add_foreign_key "petitions", "users"

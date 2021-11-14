@@ -14,4 +14,5 @@
 #
 class OrgEvent < ApplicationRecord
   belongs_to :organization
+  has_many :org_contents
 end
