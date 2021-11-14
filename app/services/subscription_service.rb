@@ -21,7 +21,6 @@ class SubscriptionService
         raise StandardError.new "Already subscribed"
       end
 
-      byebug
       stripe_sub = stripe_service.subscribe(price)
       if fighter
         return Subscription.find_or_create_by(user: user,

@@ -21,6 +21,10 @@ module Api
       end
 
       def ppv
+
+      end
+
+      def old_ppv
         @newbie = !current_user.present?
         create_provision_user unless user.present?
 
