@@ -7,6 +7,7 @@
 #  organization_id :bigint           not null
 #  description     :string
 #  event_date      :date
+#  stream_link     :string
 #
 # Indexes
 #

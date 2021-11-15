@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_005506) do
+ActiveRecord::Schema.define(version: 2021_11_15_024044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -257,6 +257,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_005506) do
     t.bigint "organization_id", null: false
     t.string "description"
     t.date "event_date"
+    t.string "stream_link"
     t.index ["organization_id"], name: "index_org_events_on_organization_id"
   end
 
