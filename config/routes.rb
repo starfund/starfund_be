@@ -26,11 +26,12 @@ Rails.application.routes.draw do
           delete :destroy
         end
       end
-      resources :fighters
       resources :businesses
-      resources :teams
+      resources :fighters
       resources :fighter_reports
+      resources :organizations
       resources :subscriptions do
+      resources :teams
         collection do
           post :ppv
         end

@@ -1,5 +1,5 @@
 ActiveAdmin.register OrgContent do
-  permit_params :id, :title, :event_date, :description,
+  permit_params :id, :title, :event_date, :description, :feed,
                 :org_event_id, :image, :video, :public, :published,
                 :title_ru, :title_es, :description_ru, :main_event,
                 :description_es, :video_thumbnail
@@ -28,6 +28,7 @@ ActiveAdmin.register OrgContent do
     end
     column :public
     column :published
+    column :feed
     column :title_es
     column :description_es
 
@@ -46,6 +47,7 @@ ActiveAdmin.register OrgContent do
       row :description_ru
       row :public
       row :published
+      row :feed
       row "Image" do |c|
         if c.image.attached?
           ul do
@@ -84,6 +86,7 @@ ActiveAdmin.register OrgContent do
     input :main_event
     input :event_date, start_year: 2000
     input :public
+    input :feed
     unless resource.video.attached?
       f.input :image, as: :file, input_html: { direct_upload: true }
     end

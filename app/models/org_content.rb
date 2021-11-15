@@ -16,6 +16,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  main_event     :boolean          default(FALSE)
+#  feed           :boolean          default(FALSE)
 #
 # Indexes
 #
