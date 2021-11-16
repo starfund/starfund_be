@@ -6,7 +6,7 @@
 #  name            :string
 #  organization_id :bigint           not null
 #  description     :string
-#  event_date      :date
+#  event_date      :datetime
 #  stream_link     :string
 #
 # Indexes

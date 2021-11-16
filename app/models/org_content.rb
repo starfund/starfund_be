@@ -17,6 +17,7 @@
 #  updated_at     :datetime         not null
 #  main_event     :boolean          default(FALSE)
 #  feed           :boolean          default(FALSE)
+#  is_live        :boolean          default(FALSE)
 #
 # Indexes
 #

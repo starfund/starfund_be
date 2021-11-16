@@ -19,6 +19,7 @@ ActiveAdmin.register OrgContent do
     column :title_ru
     column :description_ru
     column :event_date
+    column :is_live
     column 'Type' do |c|
       if c.image.attached?
         "Image"
@@ -48,6 +49,7 @@ ActiveAdmin.register OrgContent do
       row :public
       row :published
       row :feed
+      row :is_live
       row "Image" do |c|
         if c.image.attached?
           ul do
@@ -87,6 +89,7 @@ ActiveAdmin.register OrgContent do
     input :event_date, start_year: 2000
     input :public
     input :feed
+    input :is_live
     unless resource.video.attached?
       f.input :image, as: :file, input_html: { direct_upload: true }
     end
