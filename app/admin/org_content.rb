@@ -2,6 +2,7 @@ ActiveAdmin.register OrgContent do
   permit_params :id, :title, :event_date, :description, :feed,
                 :org_event_id, :image, :video, :public, :published,
                 :title_ru, :title_es, :description_ru, :main_event,
+                :is_live, :fighter_1, :fighter_2, :winner,
                 :description_es, :video_thumbnail
 
   member_action :delete_content, method: :put do
@@ -20,6 +21,9 @@ ActiveAdmin.register OrgContent do
     column :description_ru
     column :event_date
     column :is_live
+    column :fighter_1
+    column :fighter_2
+    column :winner
     column 'Type' do |c|
       if c.image.attached?
         "Image"
@@ -50,6 +54,9 @@ ActiveAdmin.register OrgContent do
       row :published
       row :feed
       row :is_live
+      row :fighter_1
+      row :fighter_2
+      row :winner
       row "Image" do |c|
         if c.image.attached?
           ul do
@@ -90,6 +97,9 @@ ActiveAdmin.register OrgContent do
     input :public
     input :feed
     input :is_live
+    input :fighter_1
+    input :fighter_2
+    input :winner
     unless resource.video.attached?
       f.input :image, as: :file, input_html: { direct_upload: true }
     end

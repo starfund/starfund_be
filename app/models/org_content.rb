@@ -18,6 +18,9 @@
 #  main_event     :boolean          default(FALSE)
 #  feed           :boolean          default(FALSE)
 #  is_live        :boolean          default(FALSE)
+#  fighter_1      :string
+#  fighter_2      :string
+#  winner         :string
 #
 # Indexes
 #

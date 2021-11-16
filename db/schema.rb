@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_16_040708) do
+ActiveRecord::Schema.define(version: 2021_11_16_045451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -250,6 +250,9 @@ ActiveRecord::Schema.define(version: 2021_11_16_040708) do
     t.boolean "main_event", default: false
     t.boolean "feed", default: false
     t.boolean "is_live", default: false
+    t.string "fighter_1"
+    t.string "fighter_2"
+    t.string "winner"
     t.index ["org_event_id"], name: "index_org_contents_on_org_event_id"
   end
 
