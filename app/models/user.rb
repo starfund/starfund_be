@@ -71,6 +71,14 @@ class User < ApplicationRecord
     subscriptions.where.not(business: nil).filter(&:active?)
   end
 
+  def active_org_subscriptions
+    subscriptions.where.not(organization: nil).filter(&:active?)
+  end
+
+  def active_ppv_charges
+    charges.where.not(org_event: nil)
+  end
+
   def has_sub(fighter)
     return false if subscriptions.empty?
 

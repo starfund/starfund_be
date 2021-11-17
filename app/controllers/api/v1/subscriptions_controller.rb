@@ -10,6 +10,8 @@ module Api
         @subscriptions = user&.active_subscriptions || []
         @public_content = Fighter.with_basic_attachments.with_content.map(&:public_content).flatten
         @business_subs = user&.active_business_subscriptions || []
+        @org_subs = user&.active_org_subscriptions || []
+        @ppv_charges = user&.active_ppv_charges || []
       end
 
       def create
@@ -25,7 +27,7 @@ module Api
         create_provision_user unless user.present?
         return render_internal_error(StandardError.new "Already purchased") if already_purchased
 
-        @charge = ChargeService.new(user, organization, geo).ppv(card, price, card_data)
+        @charge = ChargeService.new(user, org_event, geo).ppv(card, price, card_data)
       end
 
       def old_ppv
@@ -58,7 +60,7 @@ module Api
       end
 
       def already_purchased
-        return Charge.where(user_id: user.id, organization: organization.id).any?
+        return Charge.where(user_id: user.id, org_event: org_event.id).any?
       end
 
       def user
@@ -69,7 +71,7 @@ module Api
         return fighter.price_by_geo(geo) if params[:fighter]
         return team.price_by_geo(geo) if params[:team]
         return business.price_by_geo(geo) if params[:business]
-        return params[:price] if params[:organization]
+        return params[:price] if params[:organization] || params[:org_event]
       end
 
       def name_array
@@ -91,6 +93,10 @@ module Api
       def organization
         org_name = params[:organization].downcase.capitalize
         Organization.find_by(name: org_name)
+      end
+
+      def org_event
+        OrgEvent.find(params[:org_event])
       end
 
       def card

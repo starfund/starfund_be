@@ -53,3 +53,20 @@ json.business_subscription do
     json.extract! subscription, :id, :last_charge, :last_charge_date, :status, :business_id
   end
 end
+
+json.org_subscription do
+  json.array! @org_subs do |subscription|
+    json.extract! subscription, :id, :last_charge, :last_charge_date, :status, :organization_id
+    json.org_name subscription.organization.name
+  end
+end
+
+json.ppv_charges do
+  json.array! @ppv_charges do |charge|
+    json.extract! charge, :id
+    json.org_id charge.org_event.organization.id
+    json.org_name charge.org_event.organization.name
+    json.price charge.org_event.organization.ppv_price
+  end
+end
+

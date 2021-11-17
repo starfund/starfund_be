@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_16_045451) do
+ActiveRecord::Schema.define(version: 2021_11_17_051413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -90,9 +90,9 @@ ActiveRecord::Schema.define(version: 2021_11_16_045451) do
     t.bigint "fighter_id"
     t.string "reason"
     t.integer "amount"
-    t.bigint "organization_id"
+    t.bigint "org_events_id"
     t.index ["fighter_id"], name: "index_charges_on_fighter_id"
-    t.index ["organization_id"], name: "index_charges_on_organization_id"
+    t.index ["org_events_id"], name: "index_charges_on_org_events_id"
     t.index ["user_id"], name: "index_charges_on_user_id"
   end
 
@@ -386,7 +386,7 @@ ActiveRecord::Schema.define(version: 2021_11_16_045451) do
   add_foreign_key "businesses", "contents"
   add_foreign_key "businesses", "price_tiers"
   add_foreign_key "charges", "fighters"
-  add_foreign_key "charges", "organizations"
+  add_foreign_key "charges", "org_events", column: "org_events_id"
   add_foreign_key "charges", "users"
   add_foreign_key "comments", "contents"
   add_foreign_key "comments", "users"

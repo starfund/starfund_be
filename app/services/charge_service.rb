@@ -24,7 +24,7 @@ class ChargeService
         stripe_service.add_card(token_id, user.email, user.full_name, card_data) 
       end
       stripe_charge = stripe_service.create_payment(price)
-      Charge.create(user: user, organization: originator, reason: 'ppv', amount: price)
+      Charge.create(user: user, org_event: originator, reason: 'ppv', amount: price)
     end
   end 
 end
