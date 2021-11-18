@@ -30,8 +30,8 @@ Rails.application.routes.draw do
       resources :fighters
       resources :fighter_reports
       resources :organizations
-      resources :subscriptions do
-      resources :teams
+      resources :subscriptions
+      resources :teams do
         collection do
           post :ppv
         end
