@@ -6,14 +6,9 @@ class StripeService
 
   attr_reader :user, :geo
 
-  def initialize(user, geo, organization)
+  def initialize(user, geo)
     @user = user
     @geo = geo
-    if organization == 'Cagezilla'
-      Stripe.api_key = ENV['STRIPE_CAGEZILLA_SECRET_KEY']
-    else
-      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-    end
   end
 
   def add_card(token_id, email, name, card_data)

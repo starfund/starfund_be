@@ -8,7 +8,7 @@ class SubscriptionService
     @business = business
     @organization = organization
     @geo = geo
-    @stripe_service = StripeService.new(user, geo, organization&.name);
+    @stripe_service = StripeService.new(user, geo);
   end
 
   def process(token_id, price, card_data)

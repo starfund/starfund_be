@@ -5,7 +5,7 @@ class ChargeService
     @user = user
     @originator = originator
     @geo = geo
-    @stripe_service = StripeService.new(user, geo, originator&.name);
+    @stripe_service = StripeService.new(user, geo);
   end
 
   def process(token_id, price, card_data)
