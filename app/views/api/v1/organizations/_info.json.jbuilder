@@ -1,4 +1,4 @@
-json.extract! organization, :id, :name, :ppv_price
+json.extract! organization, :id, :name, :ppv_price, :yearly_discount
 
 json.sub_price organization.price_by_geo(geo)
 json.partial! 'api/v1/organizations/attachments', organization: organization

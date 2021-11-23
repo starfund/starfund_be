@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_145450) do
+ActiveRecord::Schema.define(version: 2021_11_23_005204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -269,6 +269,7 @@ ActiveRecord::Schema.define(version: 2021_11_17_145450) do
     t.string "name"
     t.integer "ppv_price"
     t.bigint "price_tier_id", default: 1, null: false
+    t.integer "yearly_discount"
     t.index ["price_tier_id"], name: "index_organizations_on_price_tier_id"
   end
 

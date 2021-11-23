@@ -2,10 +2,11 @@
 #
 # Table name: organizations
 #
-#  id            :bigint           not null, primary key
-#  name          :string
-#  ppv_price     :integer
-#  price_tier_id :bigint           default(1), not null
+#  id              :bigint           not null, primary key
+#  name            :string
+#  ppv_price       :integer
+#  price_tier_id   :bigint           default(1), not null
+#  yearly_discount :integer
 #
 # Indexes
 #
