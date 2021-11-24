@@ -1,5 +1,5 @@
 ActiveAdmin.register Organization do
-  permit_params :id, :name, :price_tier_id, :ppv_price, :cover_photo, :yearly_discount
+  permit_params :id, :name, :price_tier_id, :ppv_price, :cover_photo, :yearly_discount, :mobile_cover_photo
 
   show do
     attributes_table do
@@ -13,6 +13,11 @@ ActiveAdmin.register Organization do
           image_tag(url_for(p.cover_photo), size: "200x200")
         end
       end
+      row "Mobile Cover Photo" do |p|
+        if p.mobile_cover_photo.attached?
+          image_tag(url_for(p.mobile_cover_photo), size: "200x200")
+        end
+      end
     end
   end
 
@@ -22,6 +27,7 @@ ActiveAdmin.register Organization do
     input :ppv_price
     input :yearly_discount
     f.input :cover_photo, as: :file
+    f.input :mobile_cover_photo, as: :file
     f.actions
   end
 end

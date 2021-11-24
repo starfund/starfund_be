@@ -17,6 +17,7 @@ class Organization < ApplicationRecord
   has_many :org_events
 
   has_one_attached :cover_photo
+  has_one_attached :mobile_cover_photo
 
   scope :with_events, -> { includes([:org_events]) }
 
