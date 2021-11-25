@@ -64,6 +64,7 @@ end
 json.ppv_charges do
   json.array! @ppv_charges do |charge|
     json.extract! charge, :id
+    json.org_event charge.org_event.id
     json.org_id charge.org_event.organization.id
     json.org_name charge.org_event.organization.name
     json.price charge.org_event.organization.ppv_price
