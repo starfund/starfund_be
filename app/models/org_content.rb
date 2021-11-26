@@ -11,7 +11,7 @@
 #  title_es       :string
 #  description_es :string
 #  public         :boolean
-#  event_date     :date
+#  event_date     :datetime
 #  published      :boolean
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

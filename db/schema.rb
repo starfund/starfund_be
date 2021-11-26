@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_005204) do
+ActiveRecord::Schema.define(version: 2021_11_26_163006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -243,7 +243,7 @@ ActiveRecord::Schema.define(version: 2021_11_23_005204) do
     t.string "title_es"
     t.string "description_es"
     t.boolean "public"
-    t.date "event_date"
+    t.datetime "event_date"
     t.boolean "published"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -383,6 +383,7 @@ ActiveRecord::Schema.define(version: 2021_11_23_005204) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_contents", "businesses"
   add_foreign_key "businesses", "contents"
   add_foreign_key "businesses", "price_tiers"
