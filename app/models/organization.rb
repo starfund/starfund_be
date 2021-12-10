@@ -25,5 +25,11 @@ class Organization < ApplicationRecord
     return price_tier.ru if geo == 'ru'
   
     price_tier.us
-  end 
+  end
+
+  def upcoming_event
+    org_events
+      .order(:event_date)
+      .filter{ |e| e.event_date > DateTime.now }[0]
+  end
 end
