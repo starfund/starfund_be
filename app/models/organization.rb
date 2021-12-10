@@ -30,6 +30,6 @@ class Organization < ApplicationRecord
   def upcoming_event
     org_events
       .order(:event_date)
-      .filter{ |e| e.event_date > DateTime.now }[0]
+      .filter{ |e| e.event_date > (DateTime.now - 7) }[0]
   end
 end

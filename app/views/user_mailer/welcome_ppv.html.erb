@@ -5,14 +5,14 @@
   </head>
   <body>
     <h1>Hi <%= @user.first_name %>!</h1>
-    <h1> Thank you for purchasing PPV <%= @organization.upcoming_event.name %> </h1>
-    <h1> Your PPV starts streaming on <%= @organization.upcoming_event.event_date %> </h1>
+    <h1> Thank you for purchasing PPV <%= @organization.upcoming_event&.name %> </h1>
+    <h1> Your PPV starts streaming on <%= @organization.upcoming_event&.event_date.strftime("%Y %m %d") %> </h1>
 
-    <p
+    <a
       href="www.starfund.app/organization/<%= @organization.id %>."
     >
       Go to PPV page
-    </p>
+    </a>
     <p>Thanks for joining and have a great day!</p>
   </body>
 </html>
