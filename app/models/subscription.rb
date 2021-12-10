@@ -26,6 +26,8 @@
 class Subscription < ApplicationRecord
   include AASM
 
+  after_create :org_email, if: -> { organization != nil }
+
   belongs_to :user
   belongs_to :fighter, optional: true
   belongs_to :team, optional: true
@@ -66,6 +68,20 @@ class Subscription < ApplicationRecord
     fighter_content = fighter&.private_content || []
     team_content = team&.fighters&.map(&:private_content) || []
     fighter_content + team_content
+  end
+
+  def org_email
+    if last_charge == organization.price_tier.us
+      UserMailer.with(
+        user: user_id,
+        organization: organization.id
+      ).welcome_monthly.deliver_now
+    else
+      UserMailer.with(
+        user: user_id,
+        organization: organization.id
+      ).welcome_annualy.deliver_now
+    end
   end
 
 end
