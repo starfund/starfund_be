@@ -4,7 +4,7 @@ ActiveAdmin.register OrgContent do
                 :title_ru, :title_es, :description_ru, :main_event,
                 :is_live, :fighter_1, :fighter_2, :winner,
                 :description_es, :video_thumbnail, :video_url,
-                :division, :rounds
+                :division, :rounds, :result_description
 
   member_action :delete_content, method: :put do
     @pic = ActiveStorage::Attachment.find_by(record_type: 'OrgContent', record_id: params[:pic_id].to_i)
@@ -63,6 +63,7 @@ ActiveAdmin.register OrgContent do
       row :video_url
       row :division
       row :rounds
+      row :result_description
       row "Image" do |c|
         if c.image.attached?
           ul do
@@ -116,6 +117,7 @@ ActiveAdmin.register OrgContent do
     input :video_url
     input :division
     input :rounds
+    input :result_description
     unless resource.video.attached?
       f.input :image, as: :file, input_html: { direct_upload: true }
     end
