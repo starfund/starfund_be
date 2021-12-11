@@ -21,6 +21,7 @@
 #  fighter_1      :string
 #  fighter_2      :string
 #  winner         :string
+#  video_url      :string
 #
 # Indexes
 #
