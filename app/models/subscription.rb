@@ -75,12 +75,12 @@ class Subscription < ApplicationRecord
       UserMailer.with(
         user: user_id,
         organization: organization.id
-      ).welcome_monthly.deliver_now
+      ).welcome_monthly.deliver_later
     else
       UserMailer.with(
         user: user_id,
         organization: organization.id
-      ).welcome_annualy.deliver_now
+      ).welcome_annualy.deliver_later
     end
   end
 
