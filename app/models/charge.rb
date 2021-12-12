@@ -26,6 +26,6 @@ class Charge < ApplicationRecord
     UserMailer.with(
       user: user_id,
       organization: org_event.organization.id
-    ).welcome_ppv.deliver_now
+    ).welcome_ppv.deliver_later
   end
 end

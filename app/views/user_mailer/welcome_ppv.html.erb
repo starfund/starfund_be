@@ -6,8 +6,6 @@
   <body>
     <h1>Hi <%= @user.first_name %>!</h1>
     <h1> Thank you for purchasing PPV <%= @organization.upcoming_event&.name %> </h1>
-    <h1> Your PPV starts streaming on <%= @organization.upcoming_event&.event_date.strftime("%Y %m %d") %> </h1>
-
     <a
       href="www.starfund.app/organization/<%= @organization.id %>."
     >
