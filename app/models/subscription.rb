@@ -26,8 +26,6 @@
 class Subscription < ApplicationRecord
   include AASM
 
-  after_create :org_email, if: -> { organization != nil }
-
   belongs_to :user
   belongs_to :fighter, optional: true
   belongs_to :team, optional: true
