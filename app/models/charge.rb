@@ -8,6 +8,8 @@
 #  reason       :string
 #  amount       :integer
 #  org_event_id :bigint
+#  created_at   :datetime
+#  updated_at   :datetime
 #
 # Indexes
 #
