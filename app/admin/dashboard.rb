@@ -13,20 +13,15 @@ ActiveAdmin.register_page 'Dashboard' do
           ul do
             last_subs = Subscription.active.where(created_at: 1.month.ago..)
             h3 "Active Last Month - #{last_subs.count}"
-            last_subs.map do |sub|
-              li link_to("Subscription - #{sub.id}", admin_subscription_path(sub))
-            end
-            br
             non_active_subs = Subscription.where.not(status: 0)
             cancel_last_month = non_active_subs.where(last_charge: 1.month.ago..)
             h3 "Cancel Last Month - #{cancel_last_month.count}"
-            cancel_last_month.map do |sub|
-              li link_to("Subscription - #{sub.id}", admin_subscription_path(sub))
-            end
+            li link_to("See Subscriptions", admin_subscriptions_path)
+            br
             br
             active_subs = Subscription.active.count
-            h3 "Total active - #{active_subs}"
-            h3 "Total cancel - #{non_active_subs.count}"
+            h3 "Total active subs - #{active_subs}"
+            h3 "Total cancel subs - #{non_active_subs.count}"
           end
         end
       end
@@ -37,6 +32,8 @@ ActiveAdmin.register_page 'Dashboard' do
             last_charges = Charge.where(created_at: 1.month.ago..)
             h3 "Eearnings Last Month SUBS - $#{last_subs.sum(:last_charge)/100}"
             h3 "Eearnings Last Month PPVs - $#{last_charges.sum(:amount)/100}"
+            li link_to("See Charges", admin_charges_path)
+            br
             br
             total_e_subs = Subscription.all.sum(:last_charge)
             total_e_charges = Charge.all.sum(:amount)
