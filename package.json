@@ -19,5 +19,8 @@
     "compression-webpack-plugin": "^4.0.0",
     "dot-prop": ">=5.2.0",
     "node-forge": ">=0.10.0"
+  },
+  "engines": {
+    "node": "15.x"
   }
 }
