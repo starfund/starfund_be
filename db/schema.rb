@@ -383,7 +383,6 @@ ActiveRecord::Schema.define(version: 2021_11_26_163006) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_contents", "businesses"
   add_foreign_key "businesses", "contents"
   add_foreign_key "businesses", "price_tiers"
