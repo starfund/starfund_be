@@ -8,6 +8,8 @@
 #  description     :string
 #  event_date      :datetime
 #  stream_link     :string
+#  finished        :boolean          default(FALSE)
+#  home_page       :boolean          default(FALSE)
 #
 # Indexes
 #

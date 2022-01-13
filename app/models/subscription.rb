@@ -68,4 +68,18 @@ class Subscription < ApplicationRecord
     fighter_content + team_content
   end
 
+  def org_email
+    if last_charge == organization.price_tier.us
+      UserMailer.with(
+        user: user_id,
+        organization: organization.id
+      ).welcome_monthly.deliver_later
+    else
+      UserMailer.with(
+        user: user_id,
+        organization: organization.id
+      ).welcome_annualy.deliver_later
+    end
+  end
+
 end

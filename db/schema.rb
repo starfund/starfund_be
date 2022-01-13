@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_163006) do
+ActiveRecord::Schema.define(version: 2022_01_09_025543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 2021_11_26_163006) do
     t.string "reason"
     t.integer "amount"
     t.bigint "org_event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["fighter_id"], name: "index_charges_on_fighter_id"
     t.index ["org_event_id"], name: "index_charges_on_org_event_id"
     t.index ["user_id"], name: "index_charges_on_user_id"
@@ -253,6 +255,10 @@ ActiveRecord::Schema.define(version: 2021_11_26_163006) do
     t.string "fighter_1"
     t.string "fighter_2"
     t.string "winner"
+    t.string "video_url"
+    t.string "division"
+    t.integer "rounds"
+    t.string "result_description"
     t.index ["org_event_id"], name: "index_org_contents_on_org_event_id"
   end
 
@@ -262,6 +268,8 @@ ActiveRecord::Schema.define(version: 2021_11_26_163006) do
     t.string "description"
     t.datetime "event_date"
     t.string "stream_link"
+    t.boolean "finished", default: false
+    t.boolean "home_page", default: false
     t.index ["organization_id"], name: "index_org_events_on_organization_id"
   end
 

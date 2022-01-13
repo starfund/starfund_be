@@ -3,7 +3,8 @@ ActiveAdmin.register OrgContent do
                 :org_event_id, :image, :video, :public, :published,
                 :title_ru, :title_es, :description_ru, :main_event,
                 :is_live, :fighter_1, :fighter_2, :winner,
-                :description_es, :video_thumbnail
+                :description_es, :video_thumbnail, :video_url,
+                :division, :rounds, :result_description
 
   member_action :delete_content, method: :put do
     @pic = ActiveStorage::Attachment.find_by(record_type: 'OrgContent', record_id: params[:pic_id].to_i)
@@ -24,6 +25,8 @@ ActiveAdmin.register OrgContent do
     column :fighter_1
     column :fighter_2
     column :winner
+    column :division
+    column :rounds
     column 'Type' do |c|
       if c.image.attached?
         "Image"
@@ -57,11 +60,22 @@ ActiveAdmin.register OrgContent do
       row :fighter_1
       row :fighter_2
       row :winner
+      row :video_url
+      row :division
+      row :rounds
+      row :result_description
       row "Image" do |c|
         if c.image.attached?
           ul do
             li do image_tag(url_for(c.image), size: "200x200") end
             li do link_to "Delete", delete_content_admin_org_content_path(pic_id: c.id), method: :put end
+          end
+        end
+      end
+      row "Vimeo Video" do |c|
+        if c.video_url
+          ul do
+            li do video_tag(c.video_url, size: "200x200") end
           end
         end
       end
@@ -100,6 +114,10 @@ ActiveAdmin.register OrgContent do
     input :fighter_1
     input :fighter_2
     input :winner
+    input :video_url
+    input :division
+    input :rounds
+    input :result_description
     unless resource.video.attached?
       f.input :image, as: :file, input_html: { direct_upload: true }
     end

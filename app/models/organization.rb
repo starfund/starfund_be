@@ -25,5 +25,9 @@ class Organization < ApplicationRecord
     return price_tier.ru if geo == 'ru'
   
     price_tier.us
-  end 
+  end
+
+  def upcoming_event
+    org_events.find_by(home_page: true)
+  end
 end
