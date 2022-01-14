@@ -1,13 +1,14 @@
 class SubscriptionService
-  attr_reader :user, :fighter, :stripe_service, :geo, :team, :business, :organization
+  attr_reader :user, :fighter, :stripe_service, :geo, :team, :business, :organization, :referal_code
 
-  def initialize(user, fighter, team, business, organization, geo)
+  def initialize(user, fighter, team, business, organization, referal_code, geo)
     @user = user
     @fighter = fighter
     @team = team
     @business = business
     @organization = organization
     @geo = geo
+    @referal_code = referal_code
     @stripe_service = StripeService.new(user, geo);
   end
 
@@ -46,9 +47,11 @@ class SubscriptionService
       if organization 
         return Subscription.find_or_create_by(user: user,
                                               organization: organization,
+                                              referal_code: referal_code,
                                               last_charge: price,
                                               last_charge_date: DateTime.now,
-                                              stripe_sub: stripe_sub.id)
+                                              stripe_sub: stripe_sub.id
+                                              )
       end
     end
   end

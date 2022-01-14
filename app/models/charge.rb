@@ -10,6 +10,7 @@
 #  org_event_id :bigint
 #  created_at   :datetime
 #  updated_at   :datetime
+#  referal_code :string
 #
 # Indexes
 #

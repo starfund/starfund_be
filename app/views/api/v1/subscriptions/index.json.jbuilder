@@ -58,6 +58,7 @@ json.org_subscription do
   json.array! @org_subs do |subscription|
     json.extract! subscription, :id, :last_charge, :last_charge_date, :status, :organization_id
     json.org_name subscription.organization.name
+    json.referal_code subscription.referal_code
   end
 end
 
@@ -68,6 +69,7 @@ json.ppv_charges do
     json.org_id charge.org_event.organization.id
     json.org_name charge.org_event.organization.name
     json.price charge.org_event.organization.ppv_price
+    json.referal_code charge.referal_code
   end
 end
 

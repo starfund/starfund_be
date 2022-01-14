@@ -19,21 +19,19 @@ module Api
         create_provision_user unless user.present?
         return render_internal_error(StandardError.new "Already subscribed") if already_subscribed
 
-        @subscription = SubscriptionService.new(user, fighter, team, business, organization, geo).process(card, price, card_data)
+        @subscription = SubscriptionService.new(user, fighter, team, business, organization, referal_code, geo).process(card, price, card_data)
       end
 
       def ppv
         @newbie = !current_user.present?
         create_provision_user unless user.present?
         return render_internal_error(StandardError.new "Already purchased") if already_purchased
-
-        @charge = ChargeService.new(user, org_event, geo).ppv(card, price, card_data)
+        @charge = ChargeService.new(user, org_event, referal_code, geo).ppv(card, price, card_data)
       end
 
       def old_ppv
         @newbie = !current_user.present?
         create_provision_user unless user.present?
-
         @charge = ChargeService.new(user, fighter, geo).process(card, ppv_price, card_data)
       end
 
@@ -110,6 +108,11 @@ module Api
       def ppv_price
         500
       end
+
+      def referal_code
+        params[:referal_code]
+      end
+
     end
   end
 end
