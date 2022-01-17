@@ -5,6 +5,7 @@ ActiveAdmin.register Subscription do
     column :id
     column :user
     column :organization
+    column :referal_code
     column :business
     column :team
     column :fighter
@@ -21,6 +22,7 @@ ActiveAdmin.register Subscription do
       row :id
       row :user
       row :organization
+      row :referal_code
       row :business
       row :team
       row :fighter

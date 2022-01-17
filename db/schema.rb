@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_09_025543) do
+ActiveRecord::Schema.define(version: 2022_01_13_171443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2022_01_09_025543) do
     t.bigint "org_event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "referal_code"
     t.index ["fighter_id"], name: "index_charges_on_fighter_id"
     t.index ["org_event_id"], name: "index_charges_on_org_event_id"
     t.index ["user_id"], name: "index_charges_on_user_id"
@@ -327,6 +328,7 @@ ActiveRecord::Schema.define(version: 2022_01_09_025543) do
     t.bigint "team_id"
     t.bigint "business_id"
     t.bigint "organization_id"
+    t.string "referal_code"
     t.index ["business_id"], name: "index_subscriptions_on_business_id"
     t.index ["fighter_id"], name: "index_subscriptions_on_fighter_id"
     t.index ["organization_id"], name: "index_subscriptions_on_organization_id"
@@ -391,7 +393,6 @@ ActiveRecord::Schema.define(version: 2022_01_09_025543) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_contents", "businesses"
   add_foreign_key "businesses", "contents"
   add_foreign_key "businesses", "price_tiers"

@@ -14,6 +14,7 @@
 #  team_id          :bigint
 #  business_id      :bigint
 #  organization_id  :bigint
+#  referal_code     :string
 #
 # Indexes
 #
