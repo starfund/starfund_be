@@ -4,7 +4,7 @@ module Api
       skip_before_action :authenticate_user!
 
       def index
-        @orgs = Organization.with_events.all
+        @orgs = Organization.with_events_and_merch.all
       end
     end
   end

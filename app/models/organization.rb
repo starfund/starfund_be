@@ -15,11 +15,12 @@
 class Organization < ApplicationRecord
   belongs_to :price_tier
   has_many :org_events
+  has_many :merch_items
 
   has_one_attached :cover_photo
   has_one_attached :mobile_cover_photo
 
-  scope :with_events, -> { includes([:org_events]) }
+  scope :with_events_and_merch, -> { includes([:org_events]).includes([:merch_items]) }
 
   def price_by_geo(geo)
     return price_tier.ru if geo == 'ru'
