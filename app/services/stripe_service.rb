@@ -59,12 +59,10 @@ class StripeService
     })
   end
 
-  def subscribe(price)
+  def subscribe(price, originator)
     begin
-      stripe_price = Stripe::Price.list(
-                       {currency: currency, type: 'recurring', limit: 50}
-                     ).select{|p| p.unit_amount_decimal.to_i == price}
-      stripe_price_id = stripe_price.first.id
+      sys_price = PriceTier.find_by(us: price, originator: originator)
+      stripe_price_id = sys_price.stripe_id
       create_customer(user.email, user.first_name) unless user.customer_id
       Stripe::Subscription.create({
         customer: user.customer_id,
@@ -76,7 +74,7 @@ class StripeService
       Raygun.track_exception(ex, {
         custom_data: {
           price: price,
-          stripe_price: stripe_price,
+          stripe_price: sys_price,
           user: user.email,
           geo: geo,
           currency: currency

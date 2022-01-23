@@ -10,6 +10,7 @@
 #  updated_at :datetime         not null
 #  name       :string
 #  stripe_id  :string
+#  originator :string
 #
 class PriceTier < ApplicationRecord
   def to_us(tier)

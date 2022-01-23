@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_011100) do
+ActiveRecord::Schema.define(version: 2022_01_23_050738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -308,6 +308,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_011100) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "stripe_id"
+    t.string "originator"
   end
 
   create_table "settings", force: :cascade do |t|

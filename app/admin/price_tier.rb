@@ -1,5 +1,5 @@
 ActiveAdmin.register PriceTier do
-  permit_params :id, :level, :us, :ru, :name, :stripe_id
+  permit_params :id, :level, :us, :ru, :name, :stripe_id, :originator
 
   show do
     attributes_table do
@@ -7,6 +7,7 @@ ActiveAdmin.register PriceTier do
       row :name
       row :level
       row :stripe_id
+      row :originator
       row "Dollars" do |p|
         p.us
       end
@@ -20,6 +21,7 @@ ActiveAdmin.register PriceTier do
     input :level
     input :name
     input :stripe_id
+    input :originator
     input :us
     input :ru
 

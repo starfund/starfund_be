@@ -21,8 +21,9 @@ class SubscriptionService
       if already_subscribed?
         raise StandardError.new "Already subscribed"
       end
-
-      stripe_sub = stripe_service.subscribe(price)
+      originator = organization || team || fighter || business
+      originator = originator.class.to_s.downcase
+      stripe_sub = stripe_service.subscribe(price, originator)
       if fighter
         p "SUB_LOGGING: CREATING SUB FOR FIGHTER"
         return Subscription.find_or_create_by(user: user,
