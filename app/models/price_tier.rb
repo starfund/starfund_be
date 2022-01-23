@@ -8,6 +8,8 @@
 #  level      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  name       :string
+#  stripe_id  :string
 #
 class PriceTier < ApplicationRecord
   def to_us(tier)
@@ -16,9 +18,5 @@ class PriceTier < ApplicationRecord
 
   def to_ru(tier)
     find_by(level: tier).ru
-  end
-
-  def name
-    level
   end
 end

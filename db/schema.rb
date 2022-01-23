@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_13_171443) do
+ActiveRecord::Schema.define(version: 2022_01_23_011100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -306,6 +306,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_171443) do
     t.integer "level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "stripe_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -393,6 +395,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_171443) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_contents", "businesses"
   add_foreign_key "businesses", "contents"
   add_foreign_key "businesses", "price_tiers"

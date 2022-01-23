@@ -24,27 +24,31 @@ class SubscriptionService
 
       stripe_sub = stripe_service.subscribe(price)
       if fighter
+        p "SUB_LOGGING: CREATING SUB FOR FIGHTER"
         return Subscription.find_or_create_by(user: user,
                                               fighter: fighter,
                                               last_charge: price,
                                               last_charge_date: DateTime.now,
                                               stripe_sub: stripe_sub.id)
       end
-      if team 
+      if team
+        p "SUB_LOGGING: CREATING SUB FOR TEAM"
         return Subscription.find_or_create_by(user: user,
                                               team: team,
                                               last_charge: price,
                                               last_charge_date: DateTime.now,
                                               stripe_sub: stripe_sub.id)
       end
-      if business 
+      if business
+        p "SUB_LOGGING: CREATING SUB FOR BUSINESS"
         return Subscription.find_or_create_by(user: user,
                                               business: business,
                                               last_charge: price,
                                               last_charge_date: DateTime.now,
                                               stripe_sub: stripe_sub.id)
       end
-      if organization 
+      if organization
+        p "SUB_LOGGING: CREATING SUB FOR ORGANIZATION"
         return Subscription.find_or_create_by(user: user,
                                               organization: organization,
                                               referal_code: referal_code,
