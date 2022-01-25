@@ -25,7 +25,6 @@ ActiveAdmin.register Organization do
     input :name
     input :price_tier, include_blank: false
     input :ppv_price
-    input :yearly_discount
     f.input :cover_photo, as: :file
     f.input :mobile_cover_photo, as: :file
     f.actions

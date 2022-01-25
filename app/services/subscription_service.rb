@@ -1,7 +1,7 @@
 class SubscriptionService
-  attr_reader :user, :fighter, :stripe_service, :geo, :team, :business, :organization, :referal_code
+  attr_reader :user, :fighter, :stripe_service, :geo, :team, :business, :organization, :referal_code, :subscription_type
 
-  def initialize(user, fighter, team, business, organization, referal_code, geo)
+  def initialize(user, fighter, team, business, organization, referal_code, subscription_type, geo)
     @user = user
     @fighter = fighter
     @team = team
@@ -9,6 +9,7 @@ class SubscriptionService
     @organization = organization
     @geo = geo
     @referal_code = referal_code
+    @subscription_type = subscription_type
     @stripe_service = StripeService.new(user, geo);
   end
 
@@ -26,7 +27,8 @@ class SubscriptionService
       originator = organization || team || fighter || business
       originator = originator.class.to_s.downcase
       p "SUB PROCESS - USER GONNA SUB TO: #{originator}"
-      stripe_sub = stripe_service.subscribe(price, originator)
+      p "SUB PROCESS - SUB TYPE IS: #{subscription_type}"
+      stripe_sub = stripe_service.subscribe(price, originator, subscription_type)
       if fighter
         p "SUB_LOGGING: CREATING SUB FOR FIGHTER"
         return Subscription.find_or_create_by(user: user,

@@ -2,15 +2,17 @@
 #
 # Table name: price_tiers
 #
-#  id         :bigint           not null, primary key
-#  us         :integer
-#  ru         :integer
-#  level      :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  name       :string
-#  stripe_id  :string
-#  originator :string
+#  id               :bigint           not null, primary key
+#  us               :integer
+#  ru               :integer
+#  level            :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  name             :string
+#  stripe_id        :string
+#  originator       :string
+#  stripe_id_annual :string
+#  us_annual        :integer
 #
 class PriceTier < ApplicationRecord
   def to_us(tier)

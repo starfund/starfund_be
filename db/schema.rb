@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_050738) do
+ActiveRecord::Schema.define(version: 2022_01_25_150837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -324,6 +324,8 @@ ActiveRecord::Schema.define(version: 2022_01_23_050738) do
     t.string "name"
     t.string "stripe_id"
     t.string "originator"
+    t.string "stripe_id_annual"
+    t.integer "us_annual"
   end
 
   create_table "settings", force: :cascade do |t|

@@ -18,8 +18,7 @@ module Api
         @newbie = !current_user.present?
         create_provision_user unless user.present?
         return render_internal_error(StandardError.new "Already subscribed") if already_subscribed
-
-        @subscription = SubscriptionService.new(user, fighter, team, business, organization, referal_code, geo).process(card, price, card_data)
+        @subscription = SubscriptionService.new(user, fighter, team, business, organization, referal_code, subscription_type, geo).process(card, price, card_data)
       end
 
       def ppv
@@ -69,7 +68,7 @@ module Api
         return fighter.price_by_geo(geo) if params[:fighter]
         return team.price_by_geo(geo) if params[:team]
         return business.price_by_geo(geo) if params[:business]
-        return params[:price] if params[:organization] || params[:org_event]
+        return params[:price] if (params[:organization] || params[:org_event])
       end
 
       def name_array
@@ -111,6 +110,10 @@ module Api
 
       def referal_code
         params[:referal_code]
+      end
+
+      def subscription_type
+        params[:subscription_type]
       end
 
     end
