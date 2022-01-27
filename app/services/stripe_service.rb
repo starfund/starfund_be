@@ -63,16 +63,7 @@ class StripeService
     begin
       p "SUBSCRIBING: #{user&.email}"
       p "FINDING PRICE FOR: #{originator} - price: #{price}"
-      if subscription_type == "monthly" then
-        sys_price = PriceTier.find_by(us:price, originator:originator)
-      elsif subscription_type == "yearly" then
-        sys_price = PriceTier.find_by(us_annual:price, originator:originator)
-      end
-      if subscription_type == "monthly" then
-        stripe_price_id = sys_price.stripe_id
-      elsif subscription_type == "yearly" then
-        stripe_price_id = sys_price.stripe_id_annual
-      end
+      stripe_price_id = PriceTier.stripe_price(subscription_type, originator,price)
       p "SUBSCRIBING - PRICE FOUND FOR STRIPE: #{stripe_price_id}"
       create_customer(user.email, user.first_name) unless user.customer_id
       Stripe::Subscription.create({
@@ -85,7 +76,10 @@ class StripeService
       p "ERROR ON STRIPE SUB"
       Raygun.track_exception(ex, {
         custom_data: {
-          stripe_price: sys_price,
+          price: price,
+          originator: originator,
+          subscription_type: subscription_type,
+          stripe_price_id: stripe_price_id,
           user: user.email,
           geo: geo,
           currency: currency

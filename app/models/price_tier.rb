@@ -22,4 +22,18 @@ class PriceTier < ApplicationRecord
   def to_ru(tier)
     find_by(level: tier).ru
   end
+
+  def self.stripe_price(sub_type, originator, price)
+    if sub_type == "monthly" then
+      sys_price = PriceTier.find_by(us:price, originator:originator)
+    elsif sub_type == "yearly" then
+      sys_price = PriceTier.find_by(us_annual:price, originator:originator)
+    end
+    if sub_type == "monthly" then
+      stripe_price_id = sys_price.stripe_id
+    elsif sub_type == "yearly" then
+      stripe_price_id = sys_price.stripe_id_annual
+    end
+    return stripe_price_id
+  end
 end
