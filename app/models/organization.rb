@@ -21,6 +21,10 @@ class Organization < ApplicationRecord
 
   scope :with_events, -> { includes([:org_events]) }
 
+  def yearly_discount 
+    100 - ((price_tier.us_annual * 100)/(price_tier.us * 12))
+  end
+
   def price_by_geo(geo)
     return price_tier.ru if geo == 'ru'
   

@@ -59,12 +59,11 @@ class StripeService
     })
   end
 
-  def subscribe(price, originator)
+  def subscribe(price, originator, subscription_type)
     begin
       p "SUBSCRIBING: #{user&.email}"
       p "FINDING PRICE FOR: #{originator} - price: #{price}"
-      sys_price = PriceTier.find_by(us: price, originator: originator)
-      stripe_price_id = sys_price.stripe_id
+      stripe_price_id = PriceTier.stripe_price(subscription_type, originator,price)
       p "SUBSCRIBING - PRICE FOUND FOR STRIPE: #{stripe_price_id}"
       create_customer(user.email, user.first_name) unless user.customer_id
       Stripe::Subscription.create({
@@ -78,7 +77,9 @@ class StripeService
       Raygun.track_exception(ex, {
         custom_data: {
           price: price,
-          stripe_price: sys_price,
+          originator: originator,
+          subscription_type: subscription_type,
+          stripe_price_id: stripe_price_id,
           user: user.email,
           geo: geo,
           currency: currency
