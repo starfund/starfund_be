@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_19_195123) do
+ActiveRecord::Schema.define(version: 2022_01_28_155134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -94,7 +94,9 @@ ActiveRecord::Schema.define(version: 2022_01_19_195123) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "referal_code"
+    t.bigint "orders_id"
     t.index ["fighter_id"], name: "index_charges_on_fighter_id"
+    t.index ["orders_id"], name: "index_charges_on_orders_id"
     t.index ["org_event_id"], name: "index_charges_on_org_event_id"
     t.index ["user_id"], name: "index_charges_on_user_id"
   end
@@ -252,6 +254,17 @@ ActiveRecord::Schema.define(version: 2022_01_19_195123) do
     t.index ["organization_id"], name: "index_merch_items_on_organization_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.string "region"
+    t.string "city"
+    t.string "address"
+    t.string "zip_code"
+    t.string "size"
+    t.integer "amount"
+    t.bigint "merch_items_id", null: false
+    t.index ["merch_items_id"], name: "index_orders_on_merch_items_id"
+  end
+
   create_table "org_contents", force: :cascade do |t|
     t.bigint "org_event_id", null: false
     t.string "title"
@@ -321,6 +334,11 @@ ActiveRecord::Schema.define(version: 2022_01_19_195123) do
     t.integer "level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "stripe_id"
+    t.string "originator"
+    t.string "stripe_id_annual"
+    t.integer "us_annual"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -412,6 +430,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_195123) do
   add_foreign_key "businesses", "contents"
   add_foreign_key "businesses", "price_tiers"
   add_foreign_key "charges", "fighters"
+  add_foreign_key "charges", "orders", column: "orders_id"
   add_foreign_key "charges", "org_events"
   add_foreign_key "charges", "users"
   add_foreign_key "comments", "contents"
@@ -427,6 +446,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_195123) do
   add_foreign_key "fighters", "price_tiers"
   add_foreign_key "fighters", "teams"
   add_foreign_key "merch_items", "organizations"
+  add_foreign_key "orders", "merch_items", column: "merch_items_id"
   add_foreign_key "org_contents", "org_events"
   add_foreign_key "org_events", "organizations"
   add_foreign_key "organizations", "price_tiers"
