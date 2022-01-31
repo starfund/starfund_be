@@ -21,6 +21,7 @@
 #
 class MerchItem < ApplicationRecord
     belongs_to :organization
+    has_many :orders
     has_one_attached :photo
 
     scope :with_basic_attachments, -> {includes([:photo_attachment])}

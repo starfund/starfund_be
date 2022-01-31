@@ -261,8 +261,8 @@ ActiveRecord::Schema.define(version: 2022_01_28_155134) do
     t.string "zip_code"
     t.string "size"
     t.integer "amount"
-    t.bigint "merch_items_id", null: false
-    t.index ["merch_items_id"], name: "index_orders_on_merch_items_id"
+    t.bigint "merch_item_id", null: false
+    t.index ["merch_item_id"], name: "index_orders_on_merch_item_id"
   end
 
   create_table "org_contents", force: :cascade do |t|
@@ -446,7 +446,7 @@ ActiveRecord::Schema.define(version: 2022_01_28_155134) do
   add_foreign_key "fighters", "price_tiers"
   add_foreign_key "fighters", "teams"
   add_foreign_key "merch_items", "organizations"
-  add_foreign_key "orders", "merch_items", column: "merch_items_id"
+  add_foreign_key "orders", "merch_items"
   add_foreign_key "org_contents", "org_events"
   add_foreign_key "org_events", "organizations"
   add_foreign_key "organizations", "price_tiers"

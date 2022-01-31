@@ -7,7 +7,7 @@ class CreateOrder < ActiveRecord::Migration[6.0]
       t.string :zip_code
       t.string :size
       t.integer :amount
-      t.references :merch_items, null: false, foreign_key: true
+      t.references :merch_item, null: false, foreign_key: true
     end
   end
 end
