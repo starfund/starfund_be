@@ -25,8 +25,13 @@ module Api
       def ppv
         @newbie = !current_user.present?
         create_provision_user unless user.present?
-        return render_internal_error(StandardError.new "Already purchased") if already_purchased
-        @charge = ChargeService.new(user, org_event, referal_code, geo).ppv(card, price, card_data)
+        @order = create_order if merch_item
+        if @order then
+          @charge = ChargeService.new(user, @order, referal_code, geo).buy_item(card, price, card_data)
+        else
+          return render_internal_error(StandardError.new "Already purchased") if already_purchased
+          @charge = ChargeService.new(user, org_event, referal_code, geo).ppv(card, price, card_data)
+        end
       end
 
       def old_ppv
@@ -61,6 +66,10 @@ module Api
         return Charge.where(user_id: user.id, org_event: org_event.id).any?
       end
 
+      def create_order
+        return @order = Order.create(region: params[:shipping_info][:state], city: params[:shipping_info][:city], address: params[:shipping_info][:address], zip_code: params[:shipping_info][:zip_code], size: params[:size], amount: params[:amount], merch_item_id: merch_item.id)
+      end
+
       def user
         @user ||= (current_user || User.find_by(email: params[:email]))
       end
@@ -69,7 +78,7 @@ module Api
         return fighter.price_by_geo(geo) if params[:fighter]
         return team.price_by_geo(geo) if params[:team]
         return business.price_by_geo(geo) if params[:business]
-        return params[:price] if params[:organization] || params[:org_event]
+        return params[:price] if params[:organization] || params[:org_event] || params[:merch_item]
       end
 
       def name_array
@@ -111,6 +120,11 @@ module Api
 
       def referal_code
         params[:referal_code]
+      end
+
+      def merch_item
+        merch_name = params[:merch_item]
+        MerchItem.find_by(name: merch_name)
       end
 
     end

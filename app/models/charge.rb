@@ -11,12 +11,12 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  referal_code :string
-#  orders_id    :bigint
+#  order_id     :bigint
 #
 # Indexes
 #
 #  index_charges_on_fighter_id    (fighter_id)
-#  index_charges_on_orders_id     (orders_id)
+#  index_charges_on_order_id      (order_id)
 #  index_charges_on_org_event_id  (org_event_id)
 #  index_charges_on_user_id       (user_id)
 #
@@ -26,6 +26,7 @@ class Charge < ApplicationRecord
   belongs_to :user
   belongs_to :fighter, optional: true
   belongs_to :org_event, optional: true
+  belongs_to :order, optional:true
 
   def ppv_email
     UserMailer.with(
