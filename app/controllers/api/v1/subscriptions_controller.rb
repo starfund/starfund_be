@@ -88,7 +88,7 @@ module Api
       end
 
       def organization
-        org_name = params[:organization]&.downcase&.capitalize
+        org_name = params[:organization]&.downcase
         Organization.find_by(name: org_name)
       end
 
