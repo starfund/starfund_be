@@ -18,4 +18,6 @@
 class OrgEvent < ApplicationRecord
   belongs_to :organization
   has_many :org_contents
+
+  has_one_attached :cover_photo
 end
