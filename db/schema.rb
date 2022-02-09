@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_150837) do
+ActiveRecord::Schema.define(version: 2022_02_09_152733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -94,7 +94,9 @@ ActiveRecord::Schema.define(version: 2022_01_25_150837) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "referal_code"
+    t.bigint "order_id"
     t.index ["fighter_id"], name: "index_charges_on_fighter_id"
+    t.index ["order_id"], name: "index_charges_on_order_id"
     t.index ["org_event_id"], name: "index_charges_on_org_event_id"
     t.index ["user_id"], name: "index_charges_on_user_id"
   end
@@ -237,6 +239,32 @@ ActiveRecord::Schema.define(version: 2022_01_25_150837) do
     t.index ["team_id"], name: "index_fighters_on_team_id"
   end
 
+  create_table "merch_items", force: :cascade do |t|
+    t.string "name"
+    t.string "product_type"
+    t.integer "price"
+    t.integer "amount_xs"
+    t.integer "amount_s"
+    t.integer "amount_m"
+    t.integer "amount_l"
+    t.integer "amount_xl"
+    t.integer "width"
+    t.integer "length"
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_merch_items_on_organization_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "region"
+    t.string "city"
+    t.string "address"
+    t.string "zip_code"
+    t.string "size"
+    t.integer "amount"
+    t.bigint "merch_item_id", null: false
+    t.index ["merch_item_id"], name: "index_orders_on_merch_item_id"
+  end
+
   create_table "org_contents", force: :cascade do |t|
     t.bigint "org_event_id", null: false
     t.string "title"
@@ -271,6 +299,7 @@ ActiveRecord::Schema.define(version: 2022_01_25_150837) do
     t.string "stream_link"
     t.boolean "finished", default: false
     t.boolean "home_page", default: false
+    t.boolean "replay"
     t.index ["organization_id"], name: "index_org_events_on_organization_id"
   end
 
@@ -398,11 +427,11 @@ ActiveRecord::Schema.define(version: 2022_01_25_150837) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_contents", "businesses"
   add_foreign_key "businesses", "contents"
   add_foreign_key "businesses", "price_tiers"
   add_foreign_key "charges", "fighters"
+  add_foreign_key "charges", "orders"
   add_foreign_key "charges", "org_events"
   add_foreign_key "charges", "users"
   add_foreign_key "comments", "contents"
@@ -417,6 +446,8 @@ ActiveRecord::Schema.define(version: 2022_01_25_150837) do
   add_foreign_key "fighters", "contents"
   add_foreign_key "fighters", "price_tiers"
   add_foreign_key "fighters", "teams"
+  add_foreign_key "merch_items", "organizations"
+  add_foreign_key "orders", "merch_items"
   add_foreign_key "org_contents", "org_events"
   add_foreign_key "org_events", "organizations"
   add_foreign_key "organizations", "price_tiers"
