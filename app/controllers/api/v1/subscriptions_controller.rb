@@ -18,8 +18,7 @@ module Api
         @newbie = !current_user.present?
         create_provision_user unless user.present?
         return render_internal_error(StandardError.new "Already subscribed") if already_subscribed
-
-        @subscription = SubscriptionService.new(user, fighter, team, business, organization, referal_code, geo).process(card, price, card_data)
+        @subscription = SubscriptionService.new(user, fighter, team, business, organization, referal_code, subscription_type, geo).process(card, price, card_data)
       end
 
       def ppv
@@ -98,7 +97,7 @@ module Api
       end
 
       def organization
-        org_name = params[:organization]&.downcase&.capitalize
+        org_name = params[:organization]&.downcase
         Organization.find_by(name: org_name)
       end
 
@@ -125,6 +124,10 @@ module Api
       def merch_item
         merch_name = params[:merch_item]
         MerchItem.find_by(name: merch_name)
+      end
+      
+      def subscription_type
+        params[:subscription_type]
       end
 
     end

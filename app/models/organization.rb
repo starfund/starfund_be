@@ -22,6 +22,10 @@ class Organization < ApplicationRecord
 
   scope :with_events_and_merch, -> { includes([:org_events]).includes([:merch_items]) }
 
+  def yearly_discount 
+    100 - ((price_tier.us_annual * 100)/(price_tier.us * 12))
+  end
+
   def price_by_geo(geo)
     return price_tier.ru if geo == 'ru'
   
