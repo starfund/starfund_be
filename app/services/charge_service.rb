@@ -27,5 +27,15 @@ class ChargeService
       stripe_charge = stripe_service.create_payment(price)
       Charge.create(user: user, org_event: originator, reason: 'ppv', amount: price, referal_code: referal_code)
     end
+  end
+  
+  def buy_item(token_id, price, card_data)
+    ActiveRecord::Base.transaction do
+      if(!user.card_id || (user&.card_id != token_id))
+        stripe_service.add_card(token_id, user.email, user.full_name, card_data) 
+      end
+      stripe_charge = stripe_service.create_payment(price)
+      Charge.create(user: user, order: originator, reason: 'merch item buy', amount: price, referal_code: referal_code)
+    end
   end 
 end

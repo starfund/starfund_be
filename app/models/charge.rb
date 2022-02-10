@@ -26,6 +26,7 @@ class Charge < ApplicationRecord
   belongs_to :user
   belongs_to :fighter, optional: true
   belongs_to :org_event, optional: true
+  belongs_to :order, optional:true
 
   def ppv_email
     UserMailer.with(
