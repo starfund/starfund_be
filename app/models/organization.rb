@@ -17,8 +17,8 @@ class Organization < ApplicationRecord
   has_many :org_events
   has_many :merch_items
 
-  has_one_attached :cover_photo
-  has_one_attached :mobile_cover_photo
+  has_many_attached :cover_photos
+  has_many_attached :mobile_cover_photos
 
   scope :with_events_and_merch, -> { includes([:org_events]).includes([:merch_items]) }
 
