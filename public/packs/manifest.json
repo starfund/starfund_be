@@ -1,51 +1,43 @@
 {
-  "active_admin.css": "/packs/css/active_admin-d909444a.css",
-  "active_admin.js": "/packs/js/active_admin-2e4ae11f72d9539dd9f4.js",
-  "active_admin.js.map": "/packs/js/active_admin-2e4ae11f72d9539dd9f4.js.map",
-  "active_admin/print.css": "/packs/css/active_admin/print-d9912d3d.css",
-  "active_admin/print.js": "/packs/js/active_admin/print-06cb8106a2b2db85feab.js",
-  "active_admin/print.js.map": "/packs/js/active_admin/print-06cb8106a2b2db85feab.js.map",
-  "application.js": "/packs/js/application-2732ea20aa2856f161af.js",
-  "application.js.map": "/packs/js/application-2732ea20aa2856f161af.js.map",
-  "direct_upload.js": "/packs/js/direct_upload-46cfe7597b07b0be13c4.js",
-  "direct_upload.js.map": "/packs/js/direct_upload-46cfe7597b07b0be13c4.js.map",
+  "active_admin.js": "/packs/js/active_admin-a2473cf485b111dc08cc.js",
+  "active_admin.js.map": "/packs/js/active_admin-a2473cf485b111dc08cc.js.map",
+  "active_admin/print.js": "/packs/js/active_admin/print-22c68fc28b2ea9bf208e.js",
+  "active_admin/print.js.map": "/packs/js/active_admin/print-22c68fc28b2ea9bf208e.js.map",
+  "application.js": "/packs/js/application-aaa0f3b60448d0aff5f5.js",
+  "application.js.map": "/packs/js/application-aaa0f3b60448d0aff5f5.js.map",
+  "direct_upload.js": "/packs/js/direct_upload-4d1f8bbb1a957286c3e2.js",
+  "direct_upload.js.map": "/packs/js/direct_upload-4d1f8bbb1a957286c3e2.js.map",
   "entrypoints": {
     "active_admin": {
-      "css": [
-        "/packs/css/active_admin-d909444a.css"
-      ],
       "js": [
-        "/packs/js/active_admin-2e4ae11f72d9539dd9f4.js"
+        "/packs/js/active_admin-a2473cf485b111dc08cc.js"
       ],
       "js.map": [
-        "/packs/js/active_admin-2e4ae11f72d9539dd9f4.js.map"
+        "/packs/js/active_admin-a2473cf485b111dc08cc.js.map"
       ]
     },
     "active_admin/print": {
-      "css": [
-        "/packs/css/active_admin/print-d9912d3d.css"
-      ],
       "js": [
-        "/packs/js/active_admin/print-06cb8106a2b2db85feab.js"
+        "/packs/js/active_admin/print-22c68fc28b2ea9bf208e.js"
       ],
       "js.map": [
-        "/packs/js/active_admin/print-06cb8106a2b2db85feab.js.map"
+        "/packs/js/active_admin/print-22c68fc28b2ea9bf208e.js.map"
       ]
     },
     "application": {
       "js": [
-        "/packs/js/application-2732ea20aa2856f161af.js"
+        "/packs/js/application-aaa0f3b60448d0aff5f5.js"
       ],
       "js.map": [
-        "/packs/js/application-2732ea20aa2856f161af.js.map"
+        "/packs/js/application-aaa0f3b60448d0aff5f5.js.map"
       ]
     },
     "direct_upload": {
       "js": [
-        "/packs/js/direct_upload-46cfe7597b07b0be13c4.js"
+        "/packs/js/direct_upload-4d1f8bbb1a957286c3e2.js"
       ],
       "js.map": [
-        "/packs/js/direct_upload-46cfe7597b07b0be13c4.js.map"
+        "/packs/js/direct_upload-4d1f8bbb1a957286c3e2.js.map"
       ]
     }
   },

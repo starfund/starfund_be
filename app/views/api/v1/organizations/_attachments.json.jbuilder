@@ -1,3 +1,6 @@
+json.organization_icon do
+    polymorphic_url(organization.organization_icon)
+end
 json.cover_photos do
     json.array! organization.cover_photos.attachments().map{|img| ({ image: polymorphic_url(img) })}
 end
