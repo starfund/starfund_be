@@ -29,7 +29,7 @@ module Api
 
       def cache_url(resource)
         if(ENV['CLOUDFRONT_URL'])
-          s3_url = "https://#{ENV['S3_BUCKET_NAME']}.s3.#{ENV['AWS_BUCKET_REGION']}.amazonaws.com"
+          s3_url = "https://#{ENV['S3_BUCKET_NAME']}.s3.amazonaws.com"
           resource.service_url.gsub(s3_url, ENV['CLOUDFRONT_URL'])
         else
           polymorphic_url(resource, only_path: true)
