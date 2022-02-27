@@ -15,11 +15,13 @@
 class Organization < ApplicationRecord
   belongs_to :price_tier
   has_many :org_events
+  has_many :merch_items
 
-  has_one_attached :cover_photo
-  has_one_attached :mobile_cover_photo
+  has_many_attached :cover_photos
+  has_many_attached :mobile_cover_photos
+  has_one_attached :organization_icon
 
-  scope :with_events, -> { includes([:org_events]) }
+  scope :with_events_and_merch, -> { includes([:org_events]).includes([:merch_items]) }
 
   def yearly_discount 
     100 - ((price_tier.us_annual * 100)/(price_tier.us * 12))

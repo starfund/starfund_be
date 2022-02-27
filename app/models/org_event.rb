@@ -10,6 +10,7 @@
 #  stream_link     :string
 #  finished        :boolean          default(FALSE)
 #  home_page       :boolean          default(FALSE)
+#  replay          :boolean
 #
 # Indexes
 #
@@ -18,4 +19,6 @@
 class OrgEvent < ApplicationRecord
   belongs_to :organization
   has_many :org_contents
+
+  has_one_attached :cover_photo
 end

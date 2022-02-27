@@ -1,2 +1,7 @@
-json.cover_photo polymorphic_url(organization.cover_photo)
-json.mobile_cover_photo polymorphic_url(organization.mobile_cover_photo) if organization.mobile_cover_photo.attached?
+json.organization_icon polymorphic_url(organization.organization_icon) if organization.organization_icon.attached?
+json.cover_photos do
+    json.array! organization.cover_photos.attachments().map{|img| ({ image: polymorphic_url(img) })}
+end
+json.mobile_cover_photos do
+    json.array! organization.mobile_cover_photos.attachments().map{|img| ({ image: polymorphic_url(img) })}
+end
